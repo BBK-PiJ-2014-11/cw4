@@ -9,41 +9,41 @@ import static org.junit.Assert.*;
 
 public class ContactTest {
 
-    private static final int newId = 11;
-    private static final String newName = "Marcus Halberstram";
-    private static final String newNote = "Marcus and I go to the same barber, although I have a slightly better haircut";
-    private Contact newContact;
-
+    private Contact testContact;
+    private final int testId = 1;
+    private final String testName = "Marcus Halberstram";
+    private final String testNote = "Marcus and I go to the same barber, although I have a slightly better haircut";
 
 
     @Before
     public void setUp() {
-        newContact = new ContactImpl(newId , newName, newNote);
+        testContact = new ContactImpl(testId , testName, testNote);
     }
 
     @After
     public void tearDown() {
-        newContact = null;
+        testContact = null;
     }
 
     @Test
     public void testGetId() {
-        assertEquals(newId, newContact.getId());
+        assertEquals(testId, testContact.getId());
     }
 
     @Test
     public void testGetName() {
-        assertEquals(newName, newContact.getName());
+        assertEquals(testName, testContact.getName());
     }
 
     @Test
     public void testGetNotes() {
-        assertEquals(newNote, newContact.getNotes());
+        assertEquals(testNote, testContact.getNotes());
     }
 
     @Test
     public void testAddNotes() {
-        newContact.addNotes("He also has a penchant for Valentino suits and Oliver Peoples glasses");
-        assertEquals(newContact.getNotes(), "Marcus and I go to the same barber, although I have a slightly better haircut. He also has a penchant for Valentino suits and Oliver Peoples glasses");
+        String newNotes = "He also has a penchant for Valentino suits and Oliver Peoples glasses";
+        testContact.addNotes(newNotes);
+        assertEquals(testContact.getNotes(),testNote+newNotes);
     }
 }
