@@ -44,13 +44,13 @@ public class ContactTest {
     public void testAddNotes() {
         String newNote = "He also has a penchant for Valentino suits and Oliver Peoples glasses.";
         testContact.addNotes(newNote);
-        assertEquals(testContact.getNotes(),testNote+newNote);
+        assertEquals(testNote+newNote, testContact.getNotes());
     }
 
     @Test
     public void testNoNotes() {
         Contact newContact = new ContactImpl(2, "Craig McDermott");
         String emptyNote = "";
-        assertEquals(newContact.getNotes(),emptyNote);
+        assertEquals(emptyNote, newContact.getNotes());
     }
 }
