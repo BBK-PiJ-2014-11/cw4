@@ -12,7 +12,7 @@ public class ContactTest {
     private Contact testContact;
     private final int testId = 1;
     private final String testName = "Marcus Halberstram";
-    private final String testNote = "Marcus and I go to the same barber, although I have a slightly better haircut";
+    private final String testNote = "Marcus and I go to the same barber, although I have a slightly better haircut.";
 
 
     @Before
@@ -42,8 +42,15 @@ public class ContactTest {
 
     @Test
     public void testAddNotes() {
-        String newNotes = "He also has a penchant for Valentino suits and Oliver Peoples glasses";
-        testContact.addNotes(newNotes);
-        assertEquals(testContact.getNotes(),testNote+newNotes);
+        String newNote = "He also has a penchant for Valentino suits and Oliver Peoples glasses.";
+        testContact.addNotes(newNote);
+        assertEquals(testContact.getNotes(),testNote+newNote);
+    }
+
+    @Test
+    public void testNoNotes() {
+        Contact newContact = new ContactImpl(2, "Craig McDermott");
+        String emptyNote = "";
+        assertEquals(newContact.getNotes(),emptyNote);
     }
 }
