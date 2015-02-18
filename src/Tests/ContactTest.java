@@ -1,5 +1,6 @@
 package Tests;
 
+import Implementations.ContactImpl;
 import Interfaces.Contact;
 import org.junit.After;
 import org.junit.Before;
@@ -62,12 +63,12 @@ public class ContactTest {
     /**
      * Testing get empty notes
      *
-     * Contact newContact notes @param left blank
+     * should @return an empty String
      */
     @Test
     public void testNoNotes() {
-        Contact newContact = new ContactImpl(2, "Craig McDermott");
         String emptyNote = "";
+        Contact newContact = new ContactImpl(2, "Craig McDermott",emptyNote );
         assertEquals(emptyNote, newContact.getNotes());
     }
 }
