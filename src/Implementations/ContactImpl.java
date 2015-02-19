@@ -17,7 +17,7 @@ public class ContactImpl implements Contact {
 
     @Override
     public int getId() {
-        return 0;
+        return id;
     }
 
     @Override
