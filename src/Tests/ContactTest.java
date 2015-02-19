@@ -57,8 +57,9 @@ public class ContactTest {
     @Test
     public void testAddNotes() {
         String newNote = "He also has a penchant for Valentino suits and Oliver Peoples glasses.";
+        String space = " ";
         testContact.addNotes(newNote);
-        assertEquals(testNote+newNote, testContact.getNotes());
+        assertEquals(testNote+space+newNote, testContact.getNotes());
     }
     /**
      * Testing get empty notes

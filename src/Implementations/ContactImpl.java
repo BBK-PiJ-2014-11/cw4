@@ -14,7 +14,6 @@ public class ContactImpl implements Contact {
         this.notes = notes;
     }
 
-
     @Override
     public int getId() {
         return id;
