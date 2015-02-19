@@ -27,7 +27,7 @@ public class ContactImpl implements Contact {
 
     @Override
     public String getNotes() {
-        return null;
+        return notes;
     }
 
     @Override
