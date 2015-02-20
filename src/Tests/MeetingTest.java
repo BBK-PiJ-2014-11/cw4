@@ -12,15 +12,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
-
+/**
+ *@author Ehshan Veerabangsa
+ */
 public class MeetingTest {
 
     private Set<Contact> testContacts;
     private Meeting testMeeting;
     private final int testId = 1;
     private final Calendar testDate = new GregorianCalendar(2011,11,11);
-
-
+    /**
+     * Test meeting constructor
+     */
     @Before
     public void setUp() {
         testContacts = new HashSet<Contact>();
@@ -32,23 +35,31 @@ public class MeetingTest {
         testContacts.add(vanPatten);
         testMeeting = new MeetingImpl(testId, testDate, testContacts);
     }
-
+    /**
+     * Removing Test meeting
+     */
     @After
     public void tearDown() {
         testContacts = null;
         testMeeting = null;
     }
-
+    /**
+     * Testing get meeting Id
+     */
     @Test
     public void testGetId() {
         assertEquals(testId, testMeeting.getId());
     }
-
+    /**
+     * Testing get meeting date
+     */
     @Test
     public void testGetDate() {
         assertEquals(testDate, testMeeting.getDate());
     }
-
+    /**
+     * Testing get meeting contacts
+     */
     @Test
     public void testGetContacts() {
         assertTrue(testMeeting.getContacts().containsAll(testContacts));
