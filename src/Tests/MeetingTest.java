@@ -41,16 +41,16 @@ public class MeetingTest {
 
     @Test
     public void testGetId() {
-
+        assertEquals(testId, testMeeting.getId());
     }
 
     @Test
     public void testGetDate() {
-
+        assertEquals(testDate, testMeeting.getDate());
     }
 
     @Test
     public void testGetContacts() {
-
+        assertTrue(testMeeting.getContacts().containsAll(testContacts));
     }
 }
