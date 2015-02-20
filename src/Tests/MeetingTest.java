@@ -2,6 +2,7 @@ package Tests;
 
 import Implementations.ContactImpl;
 import Interfaces.Contact;
+import Implementations.MeetingImpl;
 import Interfaces.Meeting;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
