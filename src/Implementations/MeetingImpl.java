@@ -25,7 +25,7 @@ public class MeetingImpl implements Meeting {
 
     @Override
     public Calendar getDate() {
-        return null;
+        return date;
     }
 
     @Override
