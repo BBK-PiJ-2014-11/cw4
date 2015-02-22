@@ -72,4 +72,11 @@ public class ContactTest {
         Contact newContact = new ContactImpl(2, "Craig McDermott",emptyNote );
         assertEquals(emptyNote, newContact.getNotes());
     }
+
+    @Test
+    public void testWithoutNotes() {
+        String emptyNote = "";
+        Contact newContact = new ContactImpl(3, "Timothy Price");
+        assertEquals(emptyNote, newContact.getNotes());
+    }
 }
