@@ -3,6 +3,8 @@ package Implementations;
 import Interfaces.Contact;
 /**
  * {@inheritDoc}
+ * 
+ * @author Ehshan Veerabangsa
  */
 public class ContactImpl implements Contact {
 
