@@ -37,6 +37,8 @@ public class ContactTest {
     }
     /**
      * Testing get Id
+     *
+     * Should @return the int testId
      */
     @Test
     public void testGetId() {
@@ -44,6 +46,8 @@ public class ContactTest {
     }
     /**
      * Testing get name
+     *
+     * Should @return the String testName
      */
     @Test
     public void testGetName() {
@@ -51,6 +55,8 @@ public class ContactTest {
     }
     /**
      * Testing get notes
+     *
+     * Should @return the String testNote
      */
     @Test
     public void testGetNotes() {
@@ -58,6 +64,8 @@ public class ContactTest {
     }
     /**
      * Testing add notes
+     *
+     * Should @return concatenation of Strings testNote+space+newNote
      */
     @Test
     public void testAddNotes() {
@@ -67,25 +75,13 @@ public class ContactTest {
         assertEquals(testNote+space+newNote, testContact.getNotes());
     }
     /**
-     * Testing get empty notes
+     * Testing get note for contact without initial notes
      *
      * should @return an empty String
      */
     @Test
     public void testNoNotes() {
         String emptyNote = "";
-        Contact newContact = new ContactImpl(2, "Craig McDermott",emptyNote );
-        assertEquals(emptyNote, newContact.getNotes());
-    }
-    /**
-     * Testing new contact without initial notes
-     *
-     * should @return an empty String
-     */
-    @Test
-    public void testWithoutNotes() {
-        String emptyNote = "";
-        Contact newContact = new ContactImpl(3, "Timothy Price");
         assertEquals(emptyNote, newContact.getNotes());
     }
 }
