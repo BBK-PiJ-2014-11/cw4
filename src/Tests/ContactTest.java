@@ -13,8 +13,11 @@ import static org.junit.Assert.*;
 public class ContactTest {
 
     private Contact testContact;
+    private Contact newContact;
     private final int testId = 1;
+    private final int newId = 2;
     private final String testName = "Marcus Halberstram";
+    private final String newName = "Timothy Price";
     private final String testNote = "Marcus and I go to the same barber, although I have a slightly better haircut.";
     /**
      * Test contact constructor
@@ -22,6 +25,7 @@ public class ContactTest {
     @Before
     public void setUp() {
         testContact = new ContactImpl(testId , testName, testNote);
+        newContact = new ContactImpl(newId, newName);
     }
     /**
      * Removing Test contact
@@ -29,6 +33,7 @@ public class ContactTest {
     @After
     public void tearDown() {
         testContact = null;
+        newContact = null;
     }
     /**
      * Testing get Id
@@ -72,7 +77,11 @@ public class ContactTest {
         Contact newContact = new ContactImpl(2, "Craig McDermott",emptyNote );
         assertEquals(emptyNote, newContact.getNotes());
     }
-
+    /**
+     * Testing new contact without initial notes
+     *
+     * should @return an empty String
+     */
     @Test
     public void testWithoutNotes() {
         String emptyNote = "";
