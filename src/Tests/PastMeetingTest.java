@@ -41,6 +41,6 @@ public class PastMeetingTest {
 
     @Test
     public void testGetNotes() {
-
+        assertEquals(,pastMeeting.getNotes());
     }
 }
