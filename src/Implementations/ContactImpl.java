@@ -14,10 +14,10 @@ public class ContactImpl implements Contact {
     /**
      * ContactImpl class constructor
      *
-     * Creates a new contact
+     * Creates a new contact with initial notes
      *
      * @param id the contact's (unique) id number
-     * @param name the contacts name
+     * @param name the contact's name
      * @param notes notes about the contact (any level of abstraction)
      */
     // n.b. need to review whether notes should be used as a parameter
@@ -26,7 +26,14 @@ public class ContactImpl implements Contact {
         this.name = name;
         this.notes = notes;
     }
-
+    /**
+     * ContactImpl class constructor
+     *
+     * Creates a new contact without initial notes
+     *
+     * @param id the contact's (unique) id number
+     * @param name the contact's name
+     */
     public ContactImpl(int id, String name ) {
         this.id = id;
         this.name = name;
