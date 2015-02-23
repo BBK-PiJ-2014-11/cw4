@@ -65,7 +65,11 @@ public class ContactImpl implements Contact {
      */
     @Override
     public void addNotes(String note) {
-        String space = " ";
-        this.notes = this.notes+space+note;
+        if(this.notes.equals("")){
+            this.notes = note;
+        }else {
+            String space = " ";
+            this.notes = this.notes + space + note;
+        }
     }
 }
