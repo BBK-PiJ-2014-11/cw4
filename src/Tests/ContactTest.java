@@ -84,4 +84,15 @@ public class ContactTest {
         String emptyNote = "";
         assertEquals(emptyNote, newContact.getNotes());
     }
+    /**
+     * Testing add notes to contact without initial notes
+     *
+     * should @return the String newNote
+     */
+    @Test
+    public void testWithoutNotes() {
+        String newNote = "Price has a strange smudge on his forehead";
+        newContact.addNotes(newNote);
+        assertEquals(newNote, newContact.getNotes());
+    }
 }
