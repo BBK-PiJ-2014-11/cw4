@@ -1,6 +1,7 @@
 package Tests;
 
 import Implementations.ContactImpl;
+import Implementations.PastMeetingImpl;
 import Interfaces.Contact;
 import Interfaces.PastMeeting;
 import org.junit.After;
@@ -79,5 +80,16 @@ public class PastMeetingTest {
     @Test
     public void testGetNotes() {
         assertEquals(pastNotes,pastMeeting.getNotes());
+    }
+    /**
+     * Testing get meeting notes
+     *
+     * should @return an empty String
+     */
+    @Test
+    public void testWithoutNotes() {
+        String emptyNote = "";
+        PastMeeting priorMeeting = new PastMeetingImpl(testId, testDate, testContacts, emptyNote);
+        assertEquals(emptyNote,priorMeeting.getNotes());
     }
 }
