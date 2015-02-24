@@ -18,7 +18,7 @@ public class PastMeetingImpl extends MeetingImpl implements PastMeeting {
 
     @Override
     public String getNotes() {
-        return null;
+        return notes;
     }
 
 }
