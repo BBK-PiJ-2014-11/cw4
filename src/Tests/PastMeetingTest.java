@@ -13,14 +13,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-
+/**
+ * @author Ehshan Veerabangsa
+ */
 public class PastMeetingTest {
     private Set<Contact> testContacts;
     private PastMeeting pastMeeting;
     private final int testId = 1;
     private final Calendar testDate = new GregorianCalendar(2011,11,11);
     private final String pastNotes = " Agreed on reservations for four at Arcadia at 8:00 on Thursday";
-
+    /**
+     * Past meeting constructor
+     */
     @Before
     public void setUp(){
         testContacts = new HashSet<Contact>();
@@ -32,28 +36,46 @@ public class PastMeetingTest {
         testContacts.add(vanPatten);
         pastMeeting = new PastMeetingImpl(testId, testDate, testContacts, pastNotes);
     }
-
+    /**
+     * Removing Past meeting
+     */
     @After
     public void tearDown() {
         testContacts = null;
         pastMeeting = null;
     }
-
+    /**
+     * Testing get meeting Id
+     *
+     * Should @return the int testId
+     */
     @Test
     public void testGetId() {
         assertEquals(testId, pastMeeting.getId());
     }
-
+    /**
+     * Testing get meeting date
+     *
+     * Should @return the Calender object testDate
+     */
     @Test
     public void testGetDate() {
         assertEquals(testDate, pastMeeting.getDate());
     }
-
+    /**
+     * Testing get meeting contacts
+     *
+     * Should return the Set testContacts
+     */
     @Test
     public void testGetContacts() {
         assertTrue(pastMeeting.getContacts().containsAll(testContacts));
     }
-
+    /**
+     * Testing get meeting notes
+     *
+     * Should @return the String pastNotes
+     */
     @Test
     public void testGetNotes() {
         assertEquals(pastNotes,pastMeeting.getNotes());
