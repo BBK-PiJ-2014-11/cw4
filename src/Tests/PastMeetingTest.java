@@ -19,7 +19,7 @@ public class PastMeetingTest {
     private PastMeeting pastMeeting;
     private final int testId = 1;
     private final Calendar testDate = new GregorianCalendar(2011,11,11);
-    private final String pastNotes = " Agreed on a reservations for four at Arcadia at 8:00 on Thursday";
+    private final String pastNotes = " Agreed on reservations for four at Arcadia at 8:00 on Thursday";
 
     @Before
     public void setUp(){
@@ -30,7 +30,7 @@ public class PastMeetingTest {
         testContacts.add(owen);
         Contact vanPatten = new ContactImpl(3,"David Van Patten","Van Patten won't go anywhere without a reservation");
         testContacts.add(vanPatten);
-        pastMeeting = new PastMeetingImpl(testId, testDate, testContacts,pastNotes);
+        pastMeeting = new PastMeetingImpl(testId, testDate, testContacts, pastNotes);
     }
 
     @After
@@ -40,7 +40,22 @@ public class PastMeetingTest {
     }
 
     @Test
+    public void testGetId() {
+        assertEquals(testId, pastMeeting.getId());
+    }
+
+    @Test
+    public void testGetDate() {
+        assertEquals(testDate, pastMeeting.getDate());
+    }
+
+    @Test
+    public void testGetContacts() {
+        assertTrue(pastMeeting.getContacts().containsAll(testContacts));
+    }
+
+    @Test
     public void testGetNotes() {
-        assertEquals(,pastMeeting.getNotes());
+        assertEquals(pastNotes,pastMeeting.getNotes());
     }
 }
