@@ -28,11 +28,11 @@ public class MeetingTest {
     @Before
     public void setUp() {
         testContacts = new HashSet<Contact>();
-        Contact bateman = new ContactImpl(1, "Patrick Bateman", "");
+        Contact bateman = new ContactImpl(1, "Patrick Bateman");
         testContacts.add(bateman);
         Contact owen = new ContactImpl(2, "Paul Owen", "He was part of that whole 'Yale thing'");
         testContacts.add(owen);
-        Contact vanPatten = new ContactImpl(3,"David Van Patten","He won't go anywhere without a reservation");
+        Contact vanPatten = new ContactImpl(3,"David Van Patten","Van Patten won't go anywhere without a reservation");
         testContacts.add(vanPatten);
         testMeeting = new MeetingImpl(testId, testDate, testContacts);
     }
@@ -46,6 +46,8 @@ public class MeetingTest {
     }
     /**
      * Testing get meeting Id
+     *
+     * Should @return the int testId
      */
     @Test
     public void testGetId() {
@@ -53,6 +55,8 @@ public class MeetingTest {
     }
     /**
      * Testing get meeting date
+     *
+     * Should @return the Calender object testDate
      */
     @Test
     public void testGetDate() {
@@ -60,6 +64,8 @@ public class MeetingTest {
     }
     /**
      * Testing get meeting contacts
+     *
+     * Should return the Set testContacts
      */
     @Test
     public void testGetContacts() {
