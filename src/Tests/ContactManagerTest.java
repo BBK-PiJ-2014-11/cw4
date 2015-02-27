@@ -23,6 +23,9 @@ public class ContactManagerTest {
     @Before
     public void setUp() {
         manager = new ContactManagerImpl();
+        manager.addNewContact("Patrick Bateman", "A big Genesis fan ever since the release of their 1980 album 'Duke'");
+        manager.addNewContact("Paul Owen","Handling the Fisher account...lucky b******");
+        manager.addNewContact("Timothy Price","He presents himself as a harmless old codger. But inside…");
         contacts = new HashSet<Contact>();
     }
 
@@ -34,11 +37,12 @@ public class ContactManagerTest {
 
     @Test
     public void testAddNewContact(){
+        ContactManager newManager = new ContactManagerImpl();
         String newName = "Donald Kimble";
         String newNote = "Lunch meeting at the Four Seasons";
-        manager.addNewContact(newName,newNote);
-        assertEquals(newName, manager.getContacts(0).getName());
-        assertEquals(newNote, manager.getContacts(0).getNotes());
+        newManager.addNewContact(newName,newNote);
+        assertEquals(newName, newManager.getContacts(0).getName());
+        assertEquals(newNote, newManager.getContacts(0).getNotes());
     }
 
 
