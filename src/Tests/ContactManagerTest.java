@@ -66,6 +66,11 @@ public class ContactManagerTest {
         assertEquals(3,contacts.size());
     }
 
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetContactsInvalidId(){
+       manager.getContacts(-1);
+    }
+
 
     /*
     @Test
