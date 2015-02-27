@@ -41,6 +41,22 @@ public class ContactManagerTest {
         assertEquals(newNote, manager.getContacts(0).getNotes());
     }
 
+
+    @Test (expected = NullPointerException.class)
+    public void testAddContactWithoutName(){
+        String newName = null;
+        String newNote = "A guy who looks a lot like Luis Carruthers";
+        manager.addNewContact(newName,newNote);
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void testAddContactWithoutNotes(){
+        String newName = "Luis Carruthers";
+        String newNote = null;
+        manager.addNewContact(newName,newNote);
+    }
+
+    /*
     @Test
     public void testAddContactWithoutName(){
         String newName = null;
@@ -56,4 +72,5 @@ public class ContactManagerTest {
         manager.addNewContact(newName,newNote);
         assertSame(manager.getContacts(0),NullPointerException.class);
     }
+    */
 }
