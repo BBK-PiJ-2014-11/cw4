@@ -40,4 +40,20 @@ public class ContactManagerTest {
         assertEquals(newName, manager.getContacts(0).getName());
         assertEquals(newNote, manager.getContacts(0).getNotes());
     }
+
+    @Test
+    public void testAddContactWithoutName(){
+        String newName = null;
+        String newNote = "A guy who looks a lot like Luis Carruthers";
+        manager.addNewContact(newName,newNote);
+        assertSame(manager.getContacts(0),NullPointerException.class);
+    }
+
+    @Test
+    public void testAddContactWithoutNotes(){
+        String newName = "Luis Carruthers";
+        String newNote = null;
+        manager.addNewContact(newName,newNote);
+        assertSame(manager.getContacts(0),NullPointerException.class);
+    }
 }
