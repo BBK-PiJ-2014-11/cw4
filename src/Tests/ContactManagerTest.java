@@ -71,6 +71,12 @@ public class ContactManagerTest {
        manager.getContacts(-1);
     }
 
+    @Test
+    public void testGetContactsString() {
+        contacts = manager.getContacts("Patrick Bateman");
+        assertEquals(1, contacts.size());
+    }
+
 
     /*
     @Test
