@@ -31,4 +31,13 @@ public class ContactManagerTest {
         manager = null;
         contacts = null;
     }
+
+    @Test
+    public void testAddNewContact(){
+        String newName = "Donald Kimble";
+        String newNote = "Lunch meeting at the Four Seasons";
+        manager.addNewContact(newName,newNote);
+        assertEquals(newName, manager.getContacts(0).getName());
+        assertEquals(newNote, manager.getContacts(0).getNotes());
+    }
 }
