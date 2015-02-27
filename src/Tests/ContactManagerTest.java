@@ -60,6 +60,13 @@ public class ContactManagerTest {
         manager.addNewContact(newName,newNote);
     }
 
+    @Test
+    public void testGetContactsId(){
+        contacts = manager.getContacts(0,1,2);
+        assertEquals(3,contacts.size());
+    }
+
+
     /*
     @Test
     public void testAddContactWithoutName(){
