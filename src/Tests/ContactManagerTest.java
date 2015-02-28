@@ -77,6 +77,11 @@ public class ContactManagerTest {
         assertEquals(1, contacts.size());
     }
 
+    @Test
+    public void testGetContactsInvalidString() {
+        contacts = manager.getContacts("Harold Carnes");
+        assertTrue(contacts.isEmpty());
+    }
 
     /*
     @Test
