@@ -85,6 +85,7 @@ public class ContactManagerTest {
     public void testGetContactsId(){
         contacts = manager.getContacts(1,2,3);
         assertEquals(3,contacts.size());
+
     }
     /**
      * Testing getting contact with an invalid id
@@ -98,22 +99,37 @@ public class ContactManagerTest {
     /**
      * Testing getting contact by string
      *
-     * Should @return the size of the contact set
+     * Should @return the size of the contact set and the boolean found
      */
     @Test
     public void testGetContactsString() {
+        boolean found = false;
         contacts = manager.getContacts("Patrick Bateman");
+        for (Contact person : contacts) {
+            if (person.getName().equals("Patrick Bateman")) {
+                found = true;
+            }
+        }
         assertEquals(1, contacts.size());
+        assertTrue(found);
     }
     /**
      * Testing getting and unknown contact by string
      *
-     * Should @return an empty contact set
+     * Should @return the size of the contact set and the boolean found
      */
     @Test
     public void testGetContactsInvalidString() {
+        boolean found = false;
         contacts = manager.getContacts("Harold Carnes");
         assertTrue(contacts.isEmpty());
+        for (Contact person : contacts) {
+            if (person.getName().equals("Harold Carnes")) {
+                found = true;
+            }
+        }
+        assertTrue(contacts.isEmpty());
+        assertFalse(found);
     }
     /**
      * Testing getting contact with an empty string
