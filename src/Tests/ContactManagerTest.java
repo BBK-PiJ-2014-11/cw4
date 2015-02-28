@@ -83,6 +83,11 @@ public class ContactManagerTest {
         assertTrue(contacts.isEmpty());
     }
 
+    @Test (expected = NullPointerException.class)
+    public void testGetContactsEmptyString() {
+       manager.getContacts("");
+    }
+
     /*
     @Test
     public void testAddContactWithoutName(){
