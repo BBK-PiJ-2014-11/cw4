@@ -12,14 +12,18 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.Assert.*;
-
+/**
+ *  @author Ehshan Veerabangsa
+ */
 public class ContactManagerTest {
 
     private ContactManager manager;
     private Set<Contact> contacts;
     private final Calendar pastDate = new GregorianCalendar(2011,11,11);
     private final Calendar futureDate = new GregorianCalendar(2015,11,11);
-
+    /**
+     * TestContact Manager constructor
+     */
     @Before
     public void setUp() {
         manager = new ContactManagerImpl();
@@ -28,13 +32,19 @@ public class ContactManagerTest {
         manager.addNewContact("Timothy Price","He presents himself as a harmless old codger. But inside…");
         contacts = new HashSet<Contact>();
     }
-
+    /**
+     * Removing manager and contact set
+     */
     @After
     public void tearDown() {
         manager = null;
         contacts = null;
     }
-
+    /**
+     * Testing adding a new contact to new manager
+     *
+     * Should @return the first contacts name and notes
+     */
     @Test
     public void testAddNewContact(){
         ContactManager newManager = new ContactManagerImpl();
@@ -44,45 +54,72 @@ public class ContactManagerTest {
         assertEquals(newName, newManager.getContacts(0).getName());
         assertEquals(newNote, newManager.getContacts(0).getNotes());
     }
-
-
+    /**
+     * Testing adding a new contact without a name
+     *
+     * Should @throw a NullPointerException
+     */
     @Test (expected = NullPointerException.class)
     public void testAddContactWithoutName(){
         String newName = null;
         String newNote = "A guy who looks a lot like Luis Carruthers";
         manager.addNewContact(newName,newNote);
     }
-
+    /**
+     * Testing adding a new contact without notes
+     *
+     * Should @throw a NullPointerException
+     */
     @Test (expected = NullPointerException.class)
     public void testAddContactWithoutNotes(){
         String newName = "Luis Carruthers";
         String newNote = null;
         manager.addNewContact(newName,newNote);
     }
-
+    /**
+     * Testing getting contact by id
+     *
+     * Should @return the size of the contact set
+     */
     @Test
     public void testGetContactsId(){
         contacts = manager.getContacts(0,1,2);
         assertEquals(3,contacts.size());
     }
-
+    /**
+     * Testing getting contact with an invalid id
+     *
+     * Should @throw a IllegalArgumentException
+     */
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsInvalidId(){
        manager.getContacts(-1);
     }
-
+    /**
+     * Testing getting contact by string
+     *
+     * Should @return the size of the contact set
+     */
     @Test
     public void testGetContactsString() {
         contacts = manager.getContacts("Patrick Bateman");
         assertEquals(1, contacts.size());
     }
-
+    /**
+     * Testing getting and unknown contact by string
+     *
+     * Should @return an empty contact set
+     */
     @Test
     public void testGetContactsInvalidString() {
         contacts = manager.getContacts("Harold Carnes");
         assertTrue(contacts.isEmpty());
     }
-
+    /**
+     * Testing getting contact with an empty string
+     *
+     * Should @throw a NullPointerException
+     */
     @Test (expected = NullPointerException.class)
     public void testGetContactsEmptyString() {
        manager.getContacts("");
