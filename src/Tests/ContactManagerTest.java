@@ -51,8 +51,8 @@ public class ContactManagerTest {
         String newName = "Donald Kimble";
         String newNote = "Lunch meeting at the Four Seasons";
         newManager.addNewContact(newName,newNote);
-        assertEquals(newName, newManager.getContacts(0).getName());
-        assertEquals(newNote, newManager.getContacts(0).getNotes());
+        assertEquals(newName, newManager.getContacts(1).getName());
+        assertEquals(newNote, newManager.getContacts(1).getNotes());
     }
     /**
      * Testing adding a new contact without a name
@@ -83,7 +83,7 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetContactsId(){
-        contacts = manager.getContacts(0,1,2);
+        contacts = manager.getContacts(1,2,3);
         assertEquals(3,contacts.size());
     }
     /**
