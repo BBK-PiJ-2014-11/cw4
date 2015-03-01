@@ -68,7 +68,11 @@ public class ContactManagerImpl implements ContactManager {
 
     @Override
     public void addNewContact(String name, String notes) {
-
+        if (name.equals(null)|| notes.equals(null)) {
+            throw new NullPointerException();
+        }
+        Contact newContact = new ContactImpl(setContactId(),name,notes);
+        contacts.add(newContact);
     }
 
     @Override
@@ -80,7 +84,6 @@ public class ContactManagerImpl implements ContactManager {
     public Set<Contact> getContacts(String name) {
         return null;
     }
-
 
     public void flush() {
 
