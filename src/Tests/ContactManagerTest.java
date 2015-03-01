@@ -1,5 +1,6 @@
 package Tests;
 
+import Implementations.ContactManagerImpl;
 import Interfaces.Contact;
 import Interfaces.ContactManager;
 import org.junit.After;
@@ -51,8 +52,11 @@ public class ContactManagerTest {
         String newName = "Donald Kimble";
         String newNote = "Lunch meeting at the Four Seasons";
         newManager.addNewContact(newName,newNote);
-        assertEquals(newName, newManager.getContacts(1).getName());
-        assertEquals(newNote, newManager.getContacts(1).getNotes());
+        //assertEquals(newName, newManager.getContacts(1).getName());
+        //assertEquals(newNote, newManager.getContacts(1).getNotes());
+        contacts = newManager.getContacts(1);
+        assertEquals(1, contacts.size());
+        assertTrue(contactFound(contacts,"Donald Kimble"));
     }
     /**
      * Testing adding a new contact without a name
