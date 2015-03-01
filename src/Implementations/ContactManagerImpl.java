@@ -18,6 +18,10 @@ public class ContactManagerImpl implements ContactManager {
         currentdMeetingId = 0;
     }
 
+    private int setContactId() {
+        return ++this.currentContactId;
+    }
+
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;
