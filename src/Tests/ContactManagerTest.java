@@ -85,7 +85,6 @@ public class ContactManagerTest {
     public void testGetContactsId(){
         contacts = manager.getContacts(1,2,3);
         assertEquals(3,contacts.size());
-
     }
     /**
      * Testing getting contact with an invalid id
@@ -95,6 +94,15 @@ public class ContactManagerTest {
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsInvalidId(){
        manager.getContacts(-1);
+    }
+    /**
+     * Testing getting contact with an unused id
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetContactsUnusedId(){
+        manager.getContacts(4);
     }
     /**
      * Method to check whether a given set contains a contact depending on name
