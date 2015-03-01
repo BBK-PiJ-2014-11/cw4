@@ -97,21 +97,32 @@ public class ContactManagerTest {
        manager.getContacts(-1);
     }
     /**
+     * Method to check whether a given set contains a contact depending on name
+     *
+     * @param contactSet the set of contacts to be searched
+     * @param name the string to search for
+     * @return true if contact found, false if not
+     */
+    private boolean contactFound(Set<Contact> contactSet, String name) {
+        boolean found = false;
+        for (Contact person : contactSet) {
+            if (person.getName().contains(name)) {
+                found = true;
+            }
+        }
+        return found;
+    }
+    /**
      * Testing getting contact by string
      *
      * Should @return the size of the contact set and the boolean found
      */
+
     @Test
     public void testGetContactsString() {
-        boolean found = false;
         contacts = manager.getContacts("Patrick Bateman");
-        for (Contact person : contacts) {
-            if (person.getName().contains("Patrick Bateman")) {
-                found = true;
-            }
-        }
         assertEquals(1, contacts.size());
-        assertTrue(found);
+        assertTrue(contactFound(contacts,"Patrick Bateman"));
     }
     /**
      * Testing getting and unknown contact by string
@@ -120,16 +131,9 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetContactsInvalidString() {
-        boolean found = false;
         contacts = manager.getContacts("Harold Carnes");
         assertTrue(contacts.isEmpty());
-        for (Contact person : contacts) {
-            if (person.getName().contains("Harold Carnes")) {
-                found = true;
-            }
-        }
-        assertTrue(contacts.isEmpty());
-        assertFalse(found);
+        assertFalse(contactFound(contacts, "Harold Carnes"));
     }
     /**
      * Testing getting contact with an empty string
@@ -140,6 +144,7 @@ public class ContactManagerTest {
     public void testGetContactsEmptyString() {
        manager.getContacts("");
     }
+
 
     /*
     @Test
