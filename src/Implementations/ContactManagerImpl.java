@@ -2,11 +2,22 @@ package Implementations;
 
 import Interfaces.*;
 
-import java.util.Calendar;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class ContactManagerImpl implements ContactManager {
+
+    private Set<Contact> contacts;
+    private List<Meeting> meetings;
+    private int currentContactId;
+    private int currentdMeetingId;
+
+    public ContactManagerImpl(){
+        contacts = new HashSet<Contact>();
+        meetings = new ArrayList<Meeting>();
+        currentContactId = 0;
+        currentdMeetingId = 0;
+    }
+
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         return 0;
