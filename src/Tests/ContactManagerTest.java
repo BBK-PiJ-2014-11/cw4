@@ -106,7 +106,7 @@ public class ContactManagerTest {
         boolean found = false;
         contacts = manager.getContacts("Patrick Bateman");
         for (Contact person : contacts) {
-            if (person.getName().equals("Patrick Bateman")) {
+            if (person.getName().contains("Patrick Bateman")) {
                 found = true;
             }
         }
@@ -124,7 +124,7 @@ public class ContactManagerTest {
         contacts = manager.getContacts("Harold Carnes");
         assertTrue(contacts.isEmpty());
         for (Contact person : contacts) {
-            if (person.getName().equals("Harold Carnes")) {
+            if (person.getName().contains("Harold Carnes")) {
                 found = true;
             }
         }
