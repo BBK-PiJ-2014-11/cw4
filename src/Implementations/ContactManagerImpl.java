@@ -106,7 +106,7 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public void addNewContact(String name, String notes) {
-        if (name.equals(null)|| notes.equals(null)) {
+        if (name.equals(null) || notes.equals(null)) {
             throw new NullPointerException();
         }
         Contact newContact = new ContactImpl(setContactId(),name,notes);
@@ -116,6 +116,7 @@ public class ContactManagerImpl implements ContactManager {
      * {@inheritDoc}
      */
     @Override
+    // n.b need to decide where invalid ids (i.e < 1) will be checked
     public Set<Contact> getContacts(int... ids) {
         Set<Contact> foundContacts = new HashSet<>();
         for (int id : ids){
@@ -135,8 +136,13 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Set<Contact> getContacts(String name) {
-        //TODO
-        return null;
+        Set<Contact> foundContacts = new HashSet<>();
+        for(Contact person : contacts){
+            if(person.getName().toLowerCase().contains(name.toLowerCase())){
+                foundContacts.add(person);
+            }
+        }
+        return foundContacts;
     }
     /**
      * {@inheritDoc}
