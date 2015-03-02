@@ -117,10 +117,19 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Set<Contact> getContacts(int... ids) {
-        //TODO
-        return null;
+        Set<Contact> foundContacts = new HashSet<Contact>();
+        for (int id : ids){
+            for (Contact person : contacts) {
+                if (person.getId() == id) {
+                    foundContacts.add(person);
+                }
+            }
+        }
+        return foundContacts;
     }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Set<Contact> getContacts(String name) {
         //TODO
