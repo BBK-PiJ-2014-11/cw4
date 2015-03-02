@@ -117,13 +117,16 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Set<Contact> getContacts(int... ids) {
-        Set<Contact> foundContacts = new HashSet<Contact>();
+        Set<Contact> foundContacts = new HashSet<>();
         for (int id : ids){
             for (Contact person : contacts) {
                 if (person.getId() == id) {
                     foundContacts.add(person);
                 }
             }
+        }
+        if(foundContacts.isEmpty()){
+            throw new IllegalArgumentException();
         }
         return foundContacts;
     }
