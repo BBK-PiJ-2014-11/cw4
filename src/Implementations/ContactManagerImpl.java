@@ -136,8 +136,11 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Set<Contact> getContacts(String name) {
+        if (name.equals(null) || name.equals("") ) {
+            throw new NullPointerException();
+        }
         Set<Contact> foundContacts = new HashSet<>();
-        for(Contact person : contacts){
+        for (Contact person : contacts){
             if(person.getName().toLowerCase().contains(name.toLowerCase())){
                 foundContacts.add(person);
             }
