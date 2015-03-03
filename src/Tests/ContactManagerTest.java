@@ -198,5 +198,13 @@ public class ContactManagerTest {
         assertTrue(contactFound(testContacts,"Paul Owen"));
         assertTrue(contactFound(testContacts,"Timothy Price"));
     }
-
+    /**
+     * Testing adding a future meeting with a past date
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddFutureMeetingPastDate() {
+        manager.addFutureMeeting(contacts, pastDate);
+    }
 }
