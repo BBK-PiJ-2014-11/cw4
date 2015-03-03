@@ -175,7 +175,7 @@ public class ContactManagerTest {
     }
     */
     /**
-     * Testing adding a future meeting
+     * Testing adding a future meeting to manager
      *
      * Should @return the Calender object futureDate
      */
@@ -184,4 +184,19 @@ public class ContactManagerTest {
         manager.addFutureMeeting(contacts, futureDate);
         assertEquals(futureDate, manager.getMeeting(1).getDate());
     }
+    /**
+     * Testing adding a future meeting to manager by checking contacts
+     *
+     * Should @return the boolean found for each of the tested contacts
+     */
+    @Test
+    public void testAddFutureMeetingCheckContacts() {
+        Set<Contact> testContacts = new HashSet<Contact>();
+        manager.addFutureMeeting(contacts, futureDate);
+        testContacts = manager.getFutureMeeting(1).getContacts();
+        assertTrue(contactFound(testContacts,"Patrick Bateman"));
+        assertTrue(contactFound(testContacts,"Paul Owen"));
+        assertTrue(contactFound(testContacts,"Timothy Price"));
+    }
+
 }
