@@ -21,6 +21,7 @@ public class ContactManagerTest {
 
     private ContactManager manager;
     private Set<Contact> contacts;
+    private Set<Contact> newContacts;
     private final Calendar pastDate = new GregorianCalendar(2011,11,11);
     private final Calendar futureDate = new GregorianCalendar(2015,11,11);
     /**
@@ -32,7 +33,8 @@ public class ContactManagerTest {
         manager.addNewContact("Patrick Bateman", "A big Genesis fan ever since the release of their 1980 album 'Duke'");
         manager.addNewContact("Paul Owen","Handling the Fisher account...lucky b******");
         manager.addNewContact("Timothy Price","He presents himself as a harmless old codger. But inside…");
-        contacts = new HashSet<Contact>();
+        contacts = manager.getContacts(1,2,3);
+        newContacts = new HashSet<Contact>();
     }
     /**
      * Removing manager and contact set
@@ -41,6 +43,7 @@ public class ContactManagerTest {
     public void tearDown() {
         manager = null;
         contacts = null;
+        newContacts = null;
     }
     /**
      * Testing adding a new contact to new manager
@@ -55,9 +58,9 @@ public class ContactManagerTest {
         newManager.addNewContact(newName,newNote);
         //assertEquals(newName, newManager.getContacts(1).getName());
         //assertEquals(newNote, newManager.getContacts(1).getNotes());
-        contacts = newManager.getContacts(1);
-        assertEquals(1, contacts.size());
-        assertTrue(contactFound(contacts,"Donald Kimble"));
+        newContacts = newManager.getContacts(1);
+        assertEquals(1, newContacts.size());
+        assertTrue(contactFound(newContacts,"Donald Kimble"));
     }
     /**
      * Testing adding a new contact without a name
@@ -88,8 +91,8 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetContactsId(){
-        contacts = manager.getContacts(1,2,3);
-        assertEquals(3,contacts.size());
+        newContacts = manager.getContacts(1,2,3);
+        assertEquals(3,newContacts.size());
     }
     /**
      * Testing getting contact with an invalid id
@@ -133,9 +136,9 @@ public class ContactManagerTest {
 
     @Test
     public void testGetContactsString() {
-        contacts = manager.getContacts("Patrick Bateman");
-        assertEquals(1, contacts.size());
-        assertTrue(contactFound(contacts,"Patrick Bateman"));
+        newContacts = manager.getContacts("Patrick Bateman");
+        assertEquals(1, newContacts.size());
+        assertTrue(contactFound(newContacts,"Patrick Bateman"));
     }
     /**
      * Testing getting and unknown contact by string
@@ -144,9 +147,9 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetContactsInvalidString() {
-        contacts = manager.getContacts("Harold Carnes");
-        assertTrue(contacts.isEmpty());
-        assertFalse(contactFound(contacts, "Harold Carnes"));
+        newContacts = manager.getContacts("Harold Carnes");
+        assertTrue(newContacts.isEmpty());
+        assertFalse(contactFound(newContacts, "Harold Carnes"));
     }
     /**
      * Testing getting contact with an empty string
@@ -192,8 +195,8 @@ public class ContactManagerTest {
      */
     @Test
     public void testAddFutureMeetingCheckContacts() {
-        Set<Contact> testContacts = new HashSet<Contact>();
         manager.addFutureMeeting(contacts, futureDate);
+        Set<Contact> testContacts = new HashSet<Contact>();
         testContacts = manager.getFutureMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
         assertTrue(contactFound(testContacts,"Paul Owen"));
