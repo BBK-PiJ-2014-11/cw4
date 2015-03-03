@@ -241,4 +241,15 @@ public class ContactManagerTest {
     public void testGetMeetingNonExistent() {
         assertNull(manager.getMeeting(11));
     }
+    /**
+     * Testing adding a new past meeting
+     *
+     * Should @return the Calender object pastDate
+     */
+    @Test
+    public void testAddNewPassedMeeting() {
+        String meetingNote = "I was wearing a wool tweed suit and a striped cotton shirt, both by Yves Saint Laurent";
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+        assertEquals(pastDate, manager.getMeeting(1).getDate());
+    }
 }
