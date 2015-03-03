@@ -197,7 +197,7 @@ public class ContactManagerTest {
     public void testAddFutureMeetingCheckContacts() {
         manager.addFutureMeeting(contacts, futureDate);
         Set<Contact> testContacts = new HashSet<Contact>();
-        testContacts = manager.getFutureMeeting(1).getContacts();
+        testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
         assertTrue(contactFound(testContacts,"Paul Owen"));
         assertTrue(contactFound(testContacts,"Timothy Price"));
@@ -219,7 +219,7 @@ public class ContactManagerTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddFutureMeetingNoContacts() {
         Set<Contact> noContacts = new HashSet<Contact>();
-        manager.addFutureMeeting(noContacts, pastDate);
+        manager.addFutureMeeting(noContacts, futureDate);
     }
     /**
      * Testing adding a future meeting with a set containing an unknown contact
@@ -231,5 +231,14 @@ public class ContactManagerTest {
         contacts = manager.getContacts(1);
         contacts.add(new ContactImpl(4, "Marcus Halberstram"));
         manager.addFutureMeeting(contacts, futureDate);
+    }
+    /**
+     * Testing getting a non existent meeting
+     *
+     * Should @return null
+     */
+    @Test
+    public void testGetMeetingNonExistent() {
+        assertNull(manager.getMeeting(11));
     }
 }
