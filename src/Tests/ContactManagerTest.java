@@ -156,9 +156,8 @@ public class ContactManagerTest {
     public void testGetContactsEmptyString() {
        manager.getContacts("");
     }
-
-
     /*
+    IGNORE FOR NOW
     @Test
     public void testAddContactWithoutName(){
         String newName = null;
@@ -175,4 +174,14 @@ public class ContactManagerTest {
         assertSame(manager.getContacts(0),NullPointerException.class);
     }
     */
+    /**
+     * Testing adding a future meeting
+     *
+     * Should @return the Calender object futureDate
+     */
+    @Test
+    public void testAddFutureMeeting() {
+        manager.addFutureMeeting(contacts, futureDate);
+        assertEquals(futureDate, manager.getMeeting(1).getDate());
+    }
 }
