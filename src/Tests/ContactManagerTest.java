@@ -207,4 +207,14 @@ public class ContactManagerTest {
     public void testAddFutureMeetingPastDate() {
         manager.addFutureMeeting(contacts, pastDate);
     }
+    /**
+     * Testing adding a future meeting with an empty set of contacts
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddFutureMeetingNoContacts() {
+        Set<Contact> noContacts = new HashSet<Contact>();
+        manager.addFutureMeeting(noContacts, pastDate);
+    }
 }
