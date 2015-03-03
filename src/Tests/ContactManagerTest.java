@@ -1,5 +1,6 @@
 package Tests;
 
+import Implementations.ContactImpl;
 import Implementations.ContactManagerImpl;
 import Interfaces.Contact;
 import Interfaces.ContactManager;
@@ -216,5 +217,16 @@ public class ContactManagerTest {
     public void testAddFutureMeetingNoContacts() {
         Set<Contact> noContacts = new HashSet<Contact>();
         manager.addFutureMeeting(noContacts, pastDate);
+    }
+    /**
+     * Testing adding a future meeting with a set containing an unknown contact
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddFutureMeetingWithUnknownContact() {
+        contacts = manager.getContacts(1);
+        contacts.add(new ContactImpl(4, "Marcus Halberstram"));
+        manager.addFutureMeeting(contacts, futureDate);
     }
 }
