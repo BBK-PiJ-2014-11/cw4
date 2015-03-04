@@ -277,4 +277,14 @@ public class ContactManagerTest {
         String meetingNote = "We had the peanut butter soup...with smoked duck and mashed squash.";
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
+    /**
+     * Testing adding a pass meeting with a null notes
+     *
+     * Should @throw a NullPointerException
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddNewPastMeetingNullNotes() {
+        String meetingNote = null;
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+    }
 }
