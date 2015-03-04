@@ -247,9 +247,24 @@ public class ContactManagerTest {
      * Should @return the Calender object pastDate
      */
     @Test
-    public void testAddNewPassedMeeting() {
+    public void testAddNewPastMeeting() {
         String meetingNote = "I was wearing a wool tweed suit and a striped cotton shirt, both by Yves Saint Laurent";
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
         assertEquals(pastDate, manager.getMeeting(1).getDate());
+    }
+    /**
+     * Testing adding a past meeting to manager by checking contacts
+     *
+     * Should @return the boolean found for each of the tested contacts
+     */
+    @Test
+    public void testAddNewPastMeetingCheckContacts() {
+        String meetingNote = "I was wearing a wool tweed suit and a striped cotton shirt, both by Yves Saint Laurent";
+        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
+        Set<Contact> testContacts = new HashSet<Contact>();
+        testContacts = manager.getMeeting(1).getContacts();
+        assertTrue(contactFound(testContacts,"Patrick Bateman"));
+        assertTrue(contactFound(testContacts,"Paul Owen"));
+        assertTrue(contactFound(testContacts,"Timothy Price"));
     }
 }
