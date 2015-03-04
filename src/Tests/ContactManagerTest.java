@@ -313,10 +313,10 @@ public class ContactManagerTest {
      * Testing getting pass meeting
      *
      * Should @return the calender object pastDate, the String meetingNote and
-     * the boolean found for each of the tested contacts for ID1
+     * the boolean found for each of the tested contacts for ID=1
      *
      * Should @return the calender object oldDate, the String newNote and
-     * the boolean found for each of the tested contacts for ID2
+     * the boolean found for each of the tested contacts for ID=2
      */
     @Test
     public void testGetPastMeeting() {
@@ -344,5 +344,15 @@ public class ContactManagerTest {
         assertEquals(newNote, manager.getPastMeeting(2).getNotes());
         Set<Contact> SecondMeetingContacts = manager.getPastMeeting(2).getContacts();
         assertTrue(contactFound(SecondMeetingContacts ,"Craig McDermott"));
+    }
+    /**
+     * Testing getting a past meeting held at a future date
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetPastMeetingWithFutureDate() {
+        manager.addFutureMeeting(contacts, futureDate);
+        manager.getPastMeeting(1);
     }
 }
