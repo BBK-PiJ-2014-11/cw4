@@ -200,7 +200,7 @@ public class ContactManagerTest {
         testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
         assertTrue(contactFound(testContacts,"Paul Owen"));
-        assertTrue(contactFound(testContacts,"Timothy Price"));
+        assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     /**
      * Testing adding a future meeting with a past date
@@ -265,7 +265,7 @@ public class ContactManagerTest {
         testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
         assertTrue(contactFound(testContacts,"Paul Owen"));
-        assertTrue(contactFound(testContacts,"Timothy Price"));
+        assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     /**
      * Testing adding a pass meeting with a future date
@@ -286,5 +286,16 @@ public class ContactManagerTest {
     public void testAddNewPastMeetingNullNotes() {
         String meetingNote = null;
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+    }
+    /**
+     * Testing adding a pass meeting with a null date
+     *
+     * Should @throw a NullPointerException
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddNewPastMeetingNullDate() {
+        String meetingNote = "It's, uh, all right";
+        Calendar elapsedDate = null;
+        manager.addNewPastMeeting(contacts, elapsedDate, meetingNote);
     }
 }
