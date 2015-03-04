@@ -309,4 +309,40 @@ public class ContactManagerTest {
         Set<Contact> nonExistentContacts = null;
         manager.addNewPastMeeting(nonExistentContacts, pastDate, meetingNote);
     }
+    /**
+     * Testing getting pass meeting
+     *
+     * Should @return the calender object pastDate, the String meetingNote and
+     * the boolean found for each of the tested contacts for ID1
+     *
+     * Should @return the calender object oldDate, the String newNote and
+     * the boolean found for each of the tested contacts for ID2
+     */
+    @Test
+    public void testGetPastMeeting() {
+        //first past meeting
+        String meetingNote = "Went to see the new musical...called Oh, Africa, Brave Africa";
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+
+        //second past meeting
+        manager.addNewContact("Craig McDermott","Knows the maitre'd at Canal Bar");
+        newContacts = manager.getContacts(4);
+        Calendar oldDate = new GregorianCalendar(1985,11,11);
+        String newNote = "Signed a peace treaty with Gorbachev";
+        manager.addNewPastMeeting(newContacts, oldDate, newNote);
+
+        //tests for first past meeting
+        assertEquals(pastDate, manager.getPastMeeting(1).getDate());
+        assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
+        Set<Contact> firstMeetingContacts = manager.getPastMeeting(1).getContacts();
+        assertTrue(contactFound(firstMeetingContacts,"Patrick Bateman"));
+        assertTrue(contactFound(firstMeetingContacts, "Paul Owen"));
+        assertTrue(contactFound(firstMeetingContacts, "Timothy Price"));
+
+        //tests for second past meeting
+        assertEquals(oldDate, manager.getPastMeeting(2).getDate());
+        assertEquals(newNote, manager.getPastMeeting(2).getNotes());
+        Set<Contact> SecondMeetingContacts = manager.getPastMeeting(2).getContacts();
+        assertTrue(contactFound(SecondMeetingContacts ,"Craig McDermott"));
+    }
 }
