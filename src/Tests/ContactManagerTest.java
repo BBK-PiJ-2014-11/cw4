@@ -267,4 +267,14 @@ public class ContactManagerTest {
         assertTrue(contactFound(testContacts,"Paul Owen"));
         assertTrue(contactFound(testContacts,"Timothy Price"));
     }
+    /**
+     * Testing adding a pass meeting with a future date
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNewPastMeetingFutureDate() {
+        String meetingNote = "We had the peanut butter soup...with smoked duck and mashed squash.";
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+    }
 }
