@@ -199,7 +199,7 @@ public class ContactManagerTest {
         Set<Contact> testContacts = new HashSet<Contact>();
         testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
-        assertTrue(contactFound(testContacts,"Paul Owen"));
+        assertTrue(contactFound(testContacts, "Paul Owen"));
         assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     /**
@@ -264,7 +264,7 @@ public class ContactManagerTest {
         Set<Contact> testContacts = new HashSet<Contact>();
         testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
-        assertTrue(contactFound(testContacts,"Paul Owen"));
+        assertTrue(contactFound(testContacts, "Paul Owen"));
         assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     /**
@@ -297,5 +297,16 @@ public class ContactManagerTest {
         String meetingNote = "It's, uh, all right";
         Calendar elapsedDate = null;
         manager.addNewPastMeeting(contacts, elapsedDate, meetingNote);
+    }
+    /**
+     * Testing adding a pass meeting with a null set of contacts
+     *
+     * Should @throw a NullPointerException
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddNewPastMeetingNullContacts() {
+        String meetingNote = "Nobody goes to Dorsia anymore";
+        Set<Contact> nonExistentContacts = null;
+        manager.addNewPastMeeting(nonExistentContacts, pastDate, meetingNote);
     }
 }
