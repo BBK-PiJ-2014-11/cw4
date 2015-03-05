@@ -228,7 +228,6 @@ public class ContactManagerTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testAddFutureMeetingWithUnknownContact() {
-        contacts = manager.getContacts(1);
         contacts.add(new ContactImpl(4, "Marcus Halberstram"));
         manager.addFutureMeeting(contacts, futureDate);
     }
@@ -319,6 +318,17 @@ public class ContactManagerTest {
         String meetingNote = "Nobody goes to Dorsia anymore";
         Set<Contact> noContacts = new HashSet<Contact>();
         manager.addNewPastMeeting(noContacts, futureDate, meetingNote);
+    }
+    /**
+     * Testing adding a past meeting with a set containing an unknown contact
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNewPastMeetingWithUnknownContact() {
+        String meetingNote = "Had an 8.30 rez at Dorsia...great Sea Urchin Ceviche";
+        contacts.add(new ContactImpl(4, "Marcus Halberstram"));
+        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
     }
     /**
      * Testing getting past meeting
