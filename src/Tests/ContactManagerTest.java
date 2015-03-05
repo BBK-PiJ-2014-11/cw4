@@ -396,4 +396,15 @@ public class ContactManagerTest {
         Set<Contact> SecondMeetingContacts = manager.getFutureMeeting(2).getContacts();
         assertTrue(contactFound(SecondMeetingContacts ,"Craig McDermott"));
     }
+    /**
+     * Testing getting a future meeting held on a past date
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetFutureMeetingWithPastDate() {
+        String pastNote = "The pasta served was squid ravioli in a lemon grass broth";
+        manager.addNewPastMeeting(contacts, pastDate, pastNote);
+        manager.getFutureMeeting(1);
+    }
 }
