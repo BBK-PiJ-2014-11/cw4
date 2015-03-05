@@ -46,6 +46,37 @@ public class ContactManagerTest {
         newContacts = null;
     }
     /**
+     * Method to check whether a given set contains a contact depending on name
+     *
+     * @param contactSet the set of contacts to be searched
+     * @param name the string to search for
+     * @return true if contact found, false if not
+     */
+    private boolean contactFound(Set<Contact> contactSet, String name) {
+        boolean found = false;
+        for (Contact person : contactSet) {
+            if (person.getName().contains(name)) {
+                found = true;
+            }
+        }
+        return found;
+    }
+    /**
+     * Method to retrieve a contact from a given set depending on name
+     *
+     * @param contactSet the set of contacts to be searched
+     * @param name the string to search for
+     * @return person the contact if present in set, null if not
+     */
+    private Contact findContact(Set<Contact> contactSet, String name) {
+        for (Contact person : contactSet) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
+    }
+    /**
      * Testing adding a new contact to new manager
      *
      * Should @return the first contacts name and notes
@@ -112,37 +143,6 @@ public class ContactManagerTest {
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsUnusedId(){
         manager.getContacts(4);
-    }
-    /**
-     * Method to check whether a given set contains a contact depending on name
-     *
-     * @param contactSet the set of contacts to be searched
-     * @param name the string to search for
-     * @return true if contact found, false if not
-     */
-    private boolean contactFound(Set<Contact> contactSet, String name) {
-        boolean found = false;
-        for (Contact person : contactSet) {
-            if (person.getName().contains(name)) {
-                found = true;
-            }
-        }
-        return found;
-    }
-    /**
-     * Method to retrieve a contact from a given set depending on name
-     *
-     * @param contactSet the set of contacts to be searched
-     * @param name the string to search for
-     * @return person the contact if present in set, null if not
-     */
-    private Contact findContact(Set<Contact> contactSet, String name) {
-        for (Contact person : contactSet) {
-            if (person.getName().equals(name)) {
-                return person;
-            }
-        }
-        return null;
     }
     /**
      * Testing getting contact by string
