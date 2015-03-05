@@ -101,7 +101,7 @@ public class ContactManagerTest {
      */
     @Test (expected = IllegalArgumentException.class)
     public void testGetContactsInvalidId(){
-       manager.getContacts(-1);
+        manager.getContacts(-1);
     }
     /**
      * Testing getting contact with an unused id
@@ -158,7 +158,7 @@ public class ContactManagerTest {
      */
     @Test (expected = NullPointerException.class)
     public void testGetContactsEmptyString() {
-       manager.getContacts("");
+        manager.getContacts("");
     }
     /*
     IGNORE FOR NOW
@@ -268,7 +268,7 @@ public class ContactManagerTest {
         assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     /**
-     * Testing adding a pass meeting with a future date
+     * Testing adding a past meeting with a future date
      *
      * Should @throw a IllegalArgumentException
      */
@@ -278,7 +278,7 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
     /**
-     * Testing adding a pass meeting with a null notes
+     * Testing adding a past meeting with a null notes
      *
      * Should @throw a NullPointerException
      */
@@ -288,7 +288,7 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
     /**
-     * Testing adding a pass meeting with a null date
+     * Testing adding a past meeting with a null date
      *
      * Should @throw a NullPointerException
      */
@@ -299,7 +299,7 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, elapsedDate, meetingNote);
     }
     /**
-     * Testing adding a pass meeting with a null set of contacts
+     * Testing adding a past meeting with a null set of contacts
      *
      * Should @throw a NullPointerException
      */
@@ -310,13 +310,13 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(nonExistentContacts, pastDate, meetingNote);
     }
     /**
-     * Testing getting pass meeting
+     * Testing getting past meeting
      *
      * Should @return the calender object pastDate, the String meetingNote and
-     * the boolean found for each of the tested contacts for ID=1
+     * the boolean found for each of the tested contact for first meeting (ID = 1)
      *
      * Should @return the calender object oldDate, the String newNote and
-     * the boolean found for each of the tested contacts for ID=2
+     * the boolean found for each of the tested contact for second meeting (ID = 2)
      */
     @Test
     public void testGetPastMeeting() {
@@ -363,5 +363,37 @@ public class ContactManagerTest {
     @Test
     public void testGetPastMeetingNonExistent() {
         assertNull(manager.getPastMeeting(11));
+    }
+    /**
+     * Testing getting future meeting
+     *
+     * Should @return the calender object futureDate an the boolean
+     * found for each of the tested contact for first meeting (ID = 1)
+     *
+     * Should @return the calender object newDate the boolean
+     * found for each of the tested contact for  the second meeting (ID = 2)
+     */
+    @Test
+    public void testGetFutureMeeting() {
+        //first future meeting
+        manager.addFutureMeeting(contacts, futureDate);
+
+        //second future meeting
+        manager.addNewContact("Craig McDermott","Knows the maitre'd at Canal Bar");
+        newContacts = manager.getContacts(4);
+        Calendar newDate = new GregorianCalendar(2025,11,11);
+        manager.addFutureMeeting(newContacts, newDate);
+
+        //tests for first future meeting
+        assertEquals(futureDate, manager.getFutureMeeting(1).getDate());
+        Set<Contact> firstMeetingContacts = manager.getFutureMeeting(1).getContacts();
+        assertTrue(contactFound(firstMeetingContacts,"Patrick Bateman"));
+        assertTrue(contactFound(firstMeetingContacts, "Paul Owen"));
+        assertTrue(contactFound(firstMeetingContacts, "Timothy Price"));
+
+        //tests for second future meeting
+        assertEquals(newDate, manager.getFutureMeeting(2).getDate());
+        Set<Contact> SecondMeetingContacts = manager.getFutureMeeting(2).getContacts();
+        assertTrue(contactFound(SecondMeetingContacts ,"Craig McDermott"));
     }
 }
