@@ -310,6 +310,17 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(nonExistentContacts, pastDate, meetingNote);
     }
     /**
+     * Testing adding a a past meeting with an empty set of contacts
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNewPastMeetingNoContacts() {
+        String meetingNote = "Nobody goes to Dorsia anymore";
+        Set<Contact> noContacts = new HashSet<Contact>();
+        manager.addNewPastMeeting(noContacts, futureDate, meetingNote);
+    }
+    /**
      * Testing getting past meeting
      *
      * Should @return the calender object pastDate, the String meetingNote and
