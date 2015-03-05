@@ -60,7 +60,7 @@ public class ContactManagerTest {
         //assertEquals(newNote, newManager.getContacts(1).getNotes());
         newContacts = newManager.getContacts(1);
         assertEquals(1, newContacts.size());
-        assertTrue(contactFound(newContacts,"Donald Kimble"));
+        assertTrue(contactFound(newContacts, "Donald Kimble"));
     }
     /**
      * Testing adding a new contact without a name
@@ -82,7 +82,7 @@ public class ContactManagerTest {
     public void testAddContactWithoutNotes(){
         String newName = "Luis Carruthers";
         String newNote = null;
-        manager.addNewContact(newName,newNote);
+        manager.addNewContact(newName, newNote);
     }
     /**
      * Testing getting contact by id
@@ -92,7 +92,7 @@ public class ContactManagerTest {
     @Test
     public void testGetContactsId(){
         newContacts = manager.getContacts(1,2,3);
-        assertEquals(3,newContacts.size());
+        assertEquals(3, newContacts.size());
     }
     /**
      * Testing getting contact with an invalid id
@@ -127,6 +127,21 @@ public class ContactManagerTest {
             }
         }
         return found;
+    }
+    /**
+     * Method to retrieve a contact from a given set depending on name
+     *
+     * @param contactSet the set of contacts to be searched
+     * @param name the string to search for
+     * @return person the contact if present in set, null if not
+     */
+    private Contact findContact(Set<Contact> contactSet, String name) {
+        for (Contact person : contactSet) {
+            if (person.getName().equals(name)) {
+                return person;
+            }
+        }
+        return null;
     }
     /**
      * Testing getting contact by string
