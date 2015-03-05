@@ -59,6 +59,7 @@ public class ContactManagerTest {
         //assertEquals(newName, newManager.getContacts(1).getName());
         //assertEquals(newNote, newManager.getContacts(1).getNotes());
         newContacts = newManager.getContacts(1);
+        assertEquals(newNote, findContact(newContacts,"Donald Kimble").getNotes());
         assertEquals(1, newContacts.size());
         assertTrue(contactFound(newContacts, "Donald Kimble"));
     }
