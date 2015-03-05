@@ -407,4 +407,13 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate, pastNote);
         manager.getFutureMeeting(1);
     }
+    /**
+     * Testing getting a non existent future meeting
+     *
+     * Should @return null
+     */
+    @Test
+    public void testGetFutureMeetingNonExistent() {
+        assertNull(manager.getFutureMeeting(11));
+    }
 }
