@@ -13,7 +13,7 @@ public class ContactManagerImpl implements ContactManager {
     private Set<Contact> contacts;
     private List<Meeting> meetings;
     private int currentContactId;
-    private int currentdMeetingId;
+    private int currentMeetingId;
     /**
      * ContactManagerImpl class constructor
      *
@@ -23,7 +23,7 @@ public class ContactManagerImpl implements ContactManager {
         contacts = new HashSet<Contact>();
         meetings = new ArrayList<Meeting>();
         currentContactId = 0;
-        currentdMeetingId = 0;
+        currentMeetingId = 0;
     }
     /**
      * Methods to assign a contact id, increments value every time called
@@ -35,7 +35,7 @@ public class ContactManagerImpl implements ContactManager {
      * Methods to assign a meeting id, increments value every time called
      */
     private int setMeetingId() {
-        return ++this.currentdMeetingId;
+        return ++this.currentMeetingId;
     }
     /**
      * {@inheritDoc}
@@ -44,6 +44,9 @@ public class ContactManagerImpl implements ContactManager {
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         Calendar today = new GregorianCalendar();
         if (date.before(today)){
+            throw new IllegalArgumentException();
+        }
+        if (!this.contacts.containsAll(contacts)){
             throw new IllegalArgumentException();
         }
         MeetingImpl newMeeting = new FutureMeetingImpl(setMeetingId(), date, contacts);
