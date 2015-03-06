@@ -42,6 +42,10 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
+        Calendar today = new GregorianCalendar();
+        if (date.before(today)){
+            throw new IllegalArgumentException();
+        }
         MeetingImpl newMeeting = new FutureMeetingImpl(setMeetingId(), date, contacts);
         meetings.add(newMeeting);
         return newMeeting.getId();
