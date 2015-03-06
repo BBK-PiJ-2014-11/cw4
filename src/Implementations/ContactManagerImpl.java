@@ -32,6 +32,12 @@ public class ContactManagerImpl implements ContactManager {
         return ++this.currentContactId;
     }
     /**
+     * Methods to assign a meeting id, increments value every time called
+     */
+    private int setMeetingId() {
+        return ++this.currentdMeetingId;
+    }
+    /**
      * {@inheritDoc}
      */
     @Override

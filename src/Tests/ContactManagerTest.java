@@ -290,7 +290,7 @@ public class ContactManagerTest {
     @Test(expected = IllegalArgumentException.class)
     public void testAddNewPastMeetingFutureDate() {
         String meetingNote = "We had the peanut butter soup...with smoked duck and mashed squash.";
-        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
     }
     /**
      * Testing adding a past meeting with a null notes
