@@ -71,6 +71,10 @@ public class ContactManagerImpl implements ContactManager {
         if (meeting == null) {
             return null;
         }
+        Calendar today = new GregorianCalendar();
+        if (meeting.getDate().before(today)){
+            throw new IllegalArgumentException();
+        }
         return (FutureMeeting)meeting;
     }
     /**
