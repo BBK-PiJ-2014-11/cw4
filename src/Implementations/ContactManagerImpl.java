@@ -40,14 +40,14 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //check code for bugs
+    //bugs fixed
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         Calendar today = new GregorianCalendar();
         if (date.before(today)){
             throw new IllegalArgumentException();
         }
-        if (!this.contacts.containsAll(contacts)){
+        if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
             throw new IllegalArgumentException();
         }
         MeetingImpl newMeeting = new FutureMeetingImpl(setMeetingId(), date, contacts);
