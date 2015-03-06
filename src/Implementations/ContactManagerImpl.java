@@ -40,6 +40,7 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
+    //check code for bugs
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         Calendar today = new GregorianCalendar();
@@ -74,7 +75,11 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Meeting getMeeting(int id) {
-        //TODO
+        for(Meeting meeting : meetings){
+            if(meeting.getId()== id){
+                return meeting;
+            }
+        }
         return null;
     }
     /**
