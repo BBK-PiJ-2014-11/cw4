@@ -59,8 +59,11 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public PastMeeting getPastMeeting(int id) {
-        //TODO
-        return null;
+        Meeting meeting = getMeeting(id);
+        if (meeting == null) {
+            return null;
+        }
+        return (PastMeeting)meeting;
     }
     /**
      * {@inheritDoc}
