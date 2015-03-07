@@ -123,7 +123,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new IllegalArgumentException();
         }
         //n.b. not sure if contact check is require - review
-        if (contacts == null || date == null || text == null) {
+        if (contacts == null || date == null || text == null || text.equals("")) {
             throw new NullPointerException();
         }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
