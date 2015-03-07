@@ -116,8 +116,12 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
+    //no checking for dates?
     @Override
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
+        if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
+            throw new IllegalArgumentException();
+        }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
     /**
