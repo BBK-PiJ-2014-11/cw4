@@ -4,14 +4,12 @@ import Implementations.ContactImpl;
 import Implementations.ContactManagerImpl;
 import Interfaces.Contact;
 import Interfaces.ContactManager;
+import Interfaces.Meeting;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.junit.Assert.*;
 /**
@@ -462,5 +460,49 @@ public class ContactManagerTest {
     @Test
     public void testGetFutureMeetingNonExistent() {
         assertNull(manager.getFutureMeeting(11));
+    }
+    /*
+    * BREAK HERE
+    *
+    *
+    * NEW TEST BATCH
+    *
+    *
+    */
+    /**
+     * Testing getting the future meetings of a given contact
+     *
+     * Should @return a list containing meeting id, date and contact set for
+     * both meetings
+     */
+    @Test
+    public void getFutureMeetingListWithContact() {
+        Calendar futureDate2 = new GregorianCalendar(2016, 11, 11);
+        newContacts = manager.getContacts(1);
+
+        //create meetings
+        manager.addFutureMeeting(contacts, futureDate);
+        manager.addFutureMeeting(newContacts, futureDate2);
+
+        //creating contact object
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+
+        //getting list with contacts meetings
+        List<Meeting> meetings = manager.getFutureMeetingList(bateman);
+
+        //tests
+        assertEquals(2, meetings.size());
+
+        //checking first meeting is in list
+        assertEquals(1, meetings.get(0).getId());
+        assertEquals(futureDate, meetings.get(0).getDate());
+        Set<Contact> firstMeetingContacts = meetings.get(0).getContacts();
+        assertTrue(contactFound(firstMeetingContacts,"Patrick Bateman"));
+
+        //checking second meeting is in list
+        assertEquals(2, meetings.get(1).getId());
+        assertEquals(futureDate2, meetings.get(1).getDate());
+        Set<Contact> secondMeetingContacts = meetings.get(1).getContacts();
+        assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
 }
