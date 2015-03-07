@@ -118,7 +118,7 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
-        //TODO
+        meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
     /**
      * {@inheritDoc}
