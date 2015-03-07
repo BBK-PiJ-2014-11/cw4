@@ -303,6 +303,16 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
     /**
+     * Testing adding a past meeting with a empty notes
+     *
+     * Should @throw a NullPointerException
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddNewPastMeetingEmptyNotes() {
+        String meetingNote = "";
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+    }
+    /**
      * Testing adding a past meeting with a null date
      *
      * Should @throw a NullPointerException
