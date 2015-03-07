@@ -122,6 +122,10 @@ public class ContactManagerImpl implements ContactManager {
         if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
             throw new IllegalArgumentException();
         }
+        //n.b. not sure if contact check is require - review
+        if (contacts == null || date == null || text == null) {
+            throw new NullPointerException();
+        }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
     /**
