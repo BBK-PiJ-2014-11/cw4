@@ -505,4 +505,15 @@ public class ContactManagerTest {
         Set<Contact> secondMeetingContacts = meetings.get(1).getContacts();
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
+    /**
+     * Testing getting the future meetings of contact with no scheduled meeting
+     *
+     * Should @return an empty list
+     */
+    @Test
+    public void getFutureMeetingListWithContactNoMeetings() {
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+        List<Meeting> meetings = manager.getFutureMeetingList(bateman);
+        assertTrue(meetings.isEmpty());
+    }
 }
