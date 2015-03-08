@@ -591,7 +591,7 @@ public class ContactManagerTest {
     /**
      * Testing getting the future meetings on a given date
      *
-     * Should @return a list containing meeting chronologically sorted
+     * Should @return a list containing meetings chronologically sorted
      */
     @Test
     public void testGetFutureMeetingListWithDate() {
@@ -625,7 +625,47 @@ public class ContactManagerTest {
         assertEquals(futureDate2, meetings.get(1).getDate());
         assertEquals(futureDate3, meetings.get(2).getDate());
         assertEquals(futureDate4, meetings.get(3).getDate());
-        }
+    }
+    /**
+     * Testing getting the past meetings on a given date
+     *
+     * Should @return a list containing meetings chronologically sorted
+     */
+    @Test
+    public void testGetFutureMeetingListWithPastDate() {
+        String meetingNote1 = "Huey Lewis and the News's early work was a little too new wave for my taste";
+        String meetingNote2 = "I was wearing a double-breasted wool cavalry twill suit by Givenchy";
+        String meetingNote3 = "Table at Camols - non-smoking section";
+        String meetingNote4 = "Went to a Matinee of Les Miz";
+        String meetingNote5 = "Black-tie party at the Puck building for a new brand of computerised rowing machines";
+        manager.addNewContact("Marcus Halberstram","Marcus and I go to the same barber, although I have a slightly better haircut");
+        newContacts = manager.getContacts(4);
+
+        //create dates (pastDate with times added) n.b. 0-based for month
+        Calendar pastDate1 = new GregorianCalendar(2010, 11, 11, 11, 00);
+        Calendar pastDate2 = new GregorianCalendar(2010, 11, 11, 17, 30);
+        Calendar pastDate3 = new GregorianCalendar(2011, 11, 11, 11, 00);
+        Calendar pastDate4 = new GregorianCalendar(2011, 11, 11, 12, 15);
+        Calendar pastDate5 = new GregorianCalendar(2011, 11, 11, 17, 30);
+
+        //create meetings (not added in order)
+        manager.addNewPastMeeting(contacts, pastDate2, meetingNote2);
+        manager.addNewPastMeeting(newContacts, pastDate1, meetingNote1);
+        manager.addNewPastMeeting(contacts, pastDate5, meetingNote5);
+        manager.addNewPastMeeting(newContacts, pastDate3, meetingNote3);
+        manager.addNewPastMeeting(contacts, pastDate4, meetingNote4);
+
+        //getting list with meetings on pastDate
+        List<Meeting> meetings = manager.getFutureMeetingList(pastDate);
+
+        //tests
+        assertEquals(3, meetings.size());
+
+        //check list is chronologically sorted
+        assertEquals(pastDate3, meetings.get(0).getDate());
+        assertEquals(pastDate4, meetings.get(1).getDate());
+        assertEquals(pastDate5, meetings.get(3).getDate());
+    }
     /**
      * Testing getting the future meetings on a given date with no scheduled meetings
      *
