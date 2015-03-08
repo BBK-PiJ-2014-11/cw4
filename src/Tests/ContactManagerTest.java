@@ -516,4 +516,14 @@ public class ContactManagerTest {
         List<Meeting> meetings = manager.getFutureMeetingList(bateman);
         assertTrue(meetings.isEmpty());
     }
+    /**
+     * Testing getting the future meetings of an unknown contact
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void getFutureMeetingListWithUnknownContact() {
+        Contact halberstram = new ContactImpl(4, "Marcus Halberstram");
+        manager.getFutureMeetingList(halberstram);
+    }
 }
