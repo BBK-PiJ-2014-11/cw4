@@ -567,4 +567,15 @@ public class ContactManagerTest {
         Set<Contact> secondMeetingContacts = meetings.get(1).getContacts();
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
+    /**
+     * Testing getting the past meetings of contact with no previous meeting
+     *
+     * Should @return an empty list
+     */
+    @Test
+    public void getPastMeetingListNoMeetings() {
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+        List<PastMeeting> meetings = manager.getPastMeetingList(bateman);
+        assertTrue(meetings.isEmpty());
+    }
 }
