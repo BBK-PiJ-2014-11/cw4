@@ -588,4 +588,38 @@ public class ContactManagerTest {
         Contact halberstram = new ContactImpl(4, "Marcus Halberstram");
         manager.getPastMeetingList(halberstram);
     }
+    @Test
+    public void testGetFutureMeetingListWithDate() {
+        manager.addNewContact("Craig McDermott","Knows the maitre'd at Canal Bar");
+        newContacts = manager.getContacts(4);
+
+        //create dates (futureDate with times added) n.b. 0-based for month
+        Calendar futureDate1 = new GregorianCalendar(2015, 11, 11, 11, 00);
+        Calendar futureDate2 = new GregorianCalendar(2015, 11, 11, 11, 30);
+        Calendar futureDate3 = new GregorianCalendar(2015, 11, 11, 14, 45);
+        Calendar futureDate4 = new GregorianCalendar(2015, 11, 11, 17, 15);
+        Calendar futureDate5 = new GregorianCalendar(2016, 11, 11, 11, 00);
+
+
+        //create meetings (not added in order)
+        manager.addFutureMeeting(contacts, futureDate4);
+        manager.addFutureMeeting(newContacts, futureDate1);
+        manager.addFutureMeeting(contacts, futureDate5);
+        manager.addFutureMeeting(newContacts, futureDate2);
+        manager.addFutureMeeting(contacts, futureDate3);
+
+
+        //getting list with meetings on futureDate
+        List<Meeting> meetings = manager.getFutureMeetingList(futureDate);
+
+        //tests
+        assertEquals(4, meetings.size());
+
+        //check list is chronologically sorted
+        assertEquals(futureDate1, meetings.get(0).getDate());
+        assertEquals(futureDate2, meetings.get(1).getDate());
+        assertEquals(futureDate3, meetings.get(2).getDate());
+        assertEquals(futureDate4, meetings.get(3).getDate());
+
+        }
 }
