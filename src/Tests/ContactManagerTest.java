@@ -507,7 +507,7 @@ public class ContactManagerTest {
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
     /**
-     * Testing getting the future meetings of contact with no scheduled meeting
+     * Testing getting the future meetings of contact with no scheduled meetings
      *
      * Should @return an empty list
      */
@@ -588,6 +588,11 @@ public class ContactManagerTest {
         Contact halberstram = new ContactImpl(4, "Marcus Halberstram");
         manager.getPastMeetingList(halberstram);
     }
+    /**
+     * Testing getting the future meetings on a given date
+     *
+     * Should @return a list containing meeting chronologically sorted
+     */
     @Test
     public void testGetFutureMeetingListWithDate() {
         manager.addNewContact("Craig McDermott","Knows the maitre'd at Canal Bar");
@@ -620,6 +625,32 @@ public class ContactManagerTest {
         assertEquals(futureDate2, meetings.get(1).getDate());
         assertEquals(futureDate3, meetings.get(2).getDate());
         assertEquals(futureDate4, meetings.get(3).getDate());
-
         }
+    /**
+     * Testing getting the future meetings on a given date with no scheduled meetings
+     *
+     * Should @return empty lists
+     */
+    @Test
+    public void testGetFutureMeetingListWithDateNoMeetings() {
+        String meetingNote = "Went to Nell's with three models from Elite";
+
+        //create dates
+        Calendar pastDate1= new GregorianCalendar(2013, 11, 11, 11, 11);
+        Calendar pastDate2= new GregorianCalendar(2014, 11, 11, 11, 11);
+        Calendar futureDate1 = new GregorianCalendar(2015, 11, 11, 11, 11);
+        Calendar futureDate2 = new GregorianCalendar(2016, 11, 11, 11, 11);
+
+        //create meetings
+        manager.addNewPastMeeting(contacts, pastDate1, meetingNote);
+        manager.addFutureMeeting(newContacts, futureDate1);
+
+        //getting list with meetings
+        List<Meeting> pastMeetings = manager.getFutureMeetingList(pastDate2);
+        List<Meeting> futureMeetings = manager.getFutureMeetingList(futureDate2);
+
+        //tests
+        assertTrue(pastMeetings.isEmpty());
+        assertTrue(futureMeetings.isEmpty());
+    }
 }
