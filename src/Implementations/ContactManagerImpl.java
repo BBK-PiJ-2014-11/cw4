@@ -98,7 +98,7 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //n.b. list not chronologically sorted; check if required
+    //N.B. remember to add sorting function
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         if (!contacts.contains(contact)) {
@@ -123,10 +123,16 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
+    //N.B. remember to add sorting function
     @Override
     public List<PastMeeting> getPastMeetingList(Contact contact) {
-        //TODO
-        return null;
+        List<PastMeeting> contactMeetings = new ArrayList<PastMeeting>();
+        for(Meeting meeting : meetings) {
+            if (meeting.getDate().before(today) && meeting.getContacts().contains(contact)) {
+                contactMeetings.add((PastMeeting)meeting);
+            }
+        }
+        return contactMeetings;
     }
     /**
      * {@inheritDoc}
