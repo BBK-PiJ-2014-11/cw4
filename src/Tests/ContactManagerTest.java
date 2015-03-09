@@ -507,6 +507,42 @@ public class ContactManagerTest {
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
     /**
+     * Testing getting the future meetings of a given contact
+     *
+     * Should @return a list containing meetings chronologically sorted
+     */
+    @Test
+    public void getFutureMeetingListWithContactSortedList() {
+        newContacts = manager.getContacts(1);
+
+        //create dates
+        Calendar futureDate2 = new GregorianCalendar(2016, 11, 11);
+        Calendar futureDate3 = new GregorianCalendar(2017, 11, 11);
+        Calendar futureDate4 = new GregorianCalendar(2018, 11, 11);
+        Calendar futureDate5 = new GregorianCalendar(2019, 11, 11);
+
+        //create meetings(not added in order)
+        manager.addFutureMeeting(newContacts, futureDate5);
+        manager.addFutureMeeting(contacts, futureDate3);
+        manager.addFutureMeeting(newContacts, futureDate4);
+        manager.addFutureMeeting(contacts, futureDate);
+        manager.addFutureMeeting(newContacts, futureDate2);
+
+        //creating contact object
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+
+        //getting list with contacts meetings
+        List<Meeting> meetings = manager.getFutureMeetingList(bateman);
+
+        //tests
+        assertEquals(5, meetings.size());
+        assertEquals(futureDate, meetings.get(0).getDate());
+        assertEquals(futureDate2, meetings.get(1).getDate());
+        assertEquals(futureDate3, meetings.get(2).getDate());
+        assertEquals(futureDate4, meetings.get(3).getDate());
+        assertEquals(futureDate5, meetings.get(4).getDate());
+    }
+    /**
      * Testing getting the future meetings of contact with no scheduled meetings
      *
      * Should @return an empty list
@@ -566,6 +602,43 @@ public class ContactManagerTest {
         assertEquals(meetingNote2, meetings.get(1).getNotes());
         Set<Contact> secondMeetingContacts = meetings.get(1).getContacts();
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
+    }
+    /**
+     * Testing getting the future meetings of a given contact
+     *
+     * Should @return a list containing meetings chronologically sorted
+     */
+    @Test
+    public void getPastMeetingListWithContactSortedList() {
+        newContacts = manager.getContacts(1);
+        String meetingNote = "Decent table in Espace, the relief washed over me in an awesome wave ";
+        String meetingNote2 = "Squash";
+        String meetingNote3 = "The menu was in bail";
+        String meetingNote4 = "I can believe that Price prefers Van Patten's card to mine";
+
+        //create dates
+        Calendar pastDate2 = new GregorianCalendar(2012, 11, 11);
+        Calendar pastDate3 = new GregorianCalendar(2013, 11, 11);
+        Calendar pastDate4 = new GregorianCalendar(2014, 11, 11);
+
+        //create meetings(not added in order)
+        manager.addNewPastMeeting(newContacts, pastDate3, meetingNote3);
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+        manager.addNewPastMeeting(newContacts, pastDate4, meetingNote4);
+        manager.addNewPastMeeting(newContacts, pastDate2, meetingNote2);
+
+        //creating contact object
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+
+        //getting list with contacts meetings
+        List<PastMeeting> meetings = manager.getPastMeetingList(bateman);
+
+        //tests
+        assertEquals(4, meetings.size());
+        assertEquals(pastDate, meetings.get(0).getDate());
+        assertEquals(pastDate2, meetings.get(1).getDate());
+        assertEquals(pastDate3, meetings.get(2).getDate());
+        assertEquals(pastDate4, meetings.get(3).getDate());
     }
     /**
      * Testing getting the past meetings of contact with no previous meeting
