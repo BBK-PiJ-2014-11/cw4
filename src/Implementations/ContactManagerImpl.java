@@ -12,6 +12,7 @@ public class ContactManagerImpl implements ContactManager {
 
     private Set<Contact> contacts;
     private List<Meeting> meetings;
+    private Calendar today;
     private int currentContactId;
     private int currentMeetingId;
     /**
@@ -22,6 +23,7 @@ public class ContactManagerImpl implements ContactManager {
     public ContactManagerImpl(){
         contacts = new HashSet<Contact>();
         meetings = new ArrayList<Meeting>();
+        today = new GregorianCalendar();
         currentContactId = 0;
         currentMeetingId = 0;
     }
@@ -43,7 +45,6 @@ public class ContactManagerImpl implements ContactManager {
     //bugs fixed
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
-        Calendar today = new GregorianCalendar();
         if (date.before(today)){
             throw new IllegalArgumentException();
         }
@@ -63,7 +64,6 @@ public class ContactManagerImpl implements ContactManager {
         if (meeting == null) {
             return null;
         }
-        Calendar today = new GregorianCalendar();
         if (meeting.getDate().after(today)){
             throw new IllegalArgumentException();
         }
@@ -78,7 +78,6 @@ public class ContactManagerImpl implements ContactManager {
         if (meeting == null) {
             return null;
         }
-        Calendar today = new GregorianCalendar();
         if (meeting.getDate().before(today)){
             throw new IllegalArgumentException();
         }
