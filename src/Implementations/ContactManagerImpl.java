@@ -101,6 +101,9 @@ public class ContactManagerImpl implements ContactManager {
     //n.b. list not chronologically sorted; check if required
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
+        if (!contacts.contains(contact)) {
+            throw new IllegalArgumentException();
+        }
         List<Meeting> contactMeetings = new ArrayList<Meeting>();
         for(Meeting meeting : meetings) {
             if (meeting.getDate().after(today) && meeting.getContacts().contains(contact)) {
