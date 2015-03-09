@@ -571,14 +571,14 @@ public class ContactManagerTest {
      */
     @Test
     public void getPastMeetingList() {
-        Calendar pastDate2 = new GregorianCalendar(1985, 11, 11);
+        Calendar pastDate1 = new GregorianCalendar(1985, 11, 11);
         newContacts = manager.getContacts(1);
-        String meetingNote1 = "We, inexplicably could not get reservations at Crayons, so Price suggested the new Tony McManus restaurant ";
-        String meetingNote2 = "I was wearing a two button wool suit, cotton shirt and silk tie, all by Armani";
+        String meetingNote = "We, inexplicably could not get reservations at Crayons, so Price suggested the new Tony McManus restaurant ";
+        String meetingNote1 = "I was wearing a two button wool suit, cotton shirt and silk tie, all by Armani";
 
         //create meetings
-        manager.addNewPastMeeting(contacts, pastDate, meetingNote1);
-        manager.addNewPastMeeting(newContacts, pastDate2, meetingNote2);
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+        manager.addNewPastMeeting(newContacts, pastDate1, meetingNote1);
 
         //creating contact object
         Contact bateman = findContact(contacts,"Patrick Bateman");
@@ -590,16 +590,16 @@ public class ContactManagerTest {
         assertEquals(2, meetings.size());
 
         //checking first meeting is in list
-        assertEquals(1, meetings.get(0).getId());
-        assertEquals(pastDate, meetings.get(0).getDate());
+        assertEquals(2, meetings.get(0).getId());
+        assertEquals(pastDate1, meetings.get(0).getDate());
         assertEquals(meetingNote1, meetings.get(0).getNotes());
         Set<Contact> firstMeetingContacts = meetings.get(0).getContacts();
         assertTrue(contactFound(firstMeetingContacts,"Patrick Bateman"));
 
         //checking second meeting is in list
-        assertEquals(2, meetings.get(1).getId());
-        assertEquals(pastDate2, meetings.get(1).getDate());
-        assertEquals(meetingNote2, meetings.get(1).getNotes());
+        assertEquals(1, meetings.get(1).getId());
+        assertEquals(pastDate, meetings.get(1).getDate());
+        assertEquals(meetingNote, meetings.get(1).getNotes());
         Set<Contact> secondMeetingContacts = meetings.get(1).getContacts();
         assertTrue(contactFound(secondMeetingContacts,"Patrick Bateman"));
     }
