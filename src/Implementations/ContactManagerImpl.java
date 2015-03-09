@@ -124,8 +124,12 @@ public class ContactManagerImpl implements ContactManager {
      * {@inheritDoc}
      */
     //N.B. remember to add sorting function
+    //remember to test converting future to past meeting
     @Override
     public List<PastMeeting> getPastMeetingList(Contact contact) {
+        if (!contacts.contains(contact)) {
+            throw new IllegalArgumentException();
+        }
         List<PastMeeting> contactMeetings = new ArrayList<PastMeeting>();
         for(Meeting meeting : meetings) {
             if (meeting.getDate().before(today) && meeting.getContacts().contains(contact)) {
