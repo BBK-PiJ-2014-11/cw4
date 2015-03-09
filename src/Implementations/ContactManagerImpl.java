@@ -98,10 +98,16 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
+    //n.b. list not chronologically sorted; check if required
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
-        //TODO
-        return null;
+        List<Meeting> contactMeetings = new ArrayList<Meeting>();
+        for(Meeting meeting : meetings) {
+            if (meeting.getDate().after(today) && meeting.getContacts().contains(contact)) {
+                contactMeetings.add(meeting);
+            }
+        }
+        return contactMeetings;
     }
     /**
      * {@inheritDoc}
