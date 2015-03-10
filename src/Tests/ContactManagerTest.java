@@ -819,4 +819,14 @@ public class ContactManagerTest {
 
         assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
     }
+    /**
+     * Testing adding meeting notes a non existing meeting
+     *
+     * Should @throw an IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddMeetingNotesNonExistentMeeting() {
+        String meetingNote = "A bold-striped shirt calls for solid-colored or discreetly patterned suits and ties";
+        manager.addMeetingNotes(11, meetingNote);
+    }
 }
