@@ -806,9 +806,9 @@ public class ContactManagerTest {
         assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
     }
     /**
-     * Testing adding meeting notes to a future meeting.
+     * Testing adding meeting notes to an already held future meeting.
      *
-     * Should @return the String meetingNote
+     * Should @return the String meetingNote (also checks for instance of PastMeeting)
      */
     @Test
     public void testAddMeetingNotesFutureMeeting() {
@@ -817,6 +817,8 @@ public class ContactManagerTest {
         String meetingNote = "We're going to Nell's. Gwendolyn's father is buying it";
         manager.addMeetingNotes(1, meetingNote);
 
+        //test not vital due to getPastMeeting call below - added for clarity
+        assertTrue(manager.getPastMeeting(1) instanceof PastMeeting);
         assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
     }
     /**
@@ -828,5 +830,16 @@ public class ContactManagerTest {
     public void testAddMeetingNotesNonExistentMeeting() {
         String meetingNote = "A bold-striped shirt calls for solid-colored or discreetly patterned suits and ties";
         manager.addMeetingNotes(11, meetingNote);
+    }
+    /**
+     * Testing adding meeting notes to a yet to be held future meeting.
+     *
+     * Should @throw an IllegalStateException
+     */
+    @Test(expected = IllegalStateException.class)
+    public void testAddMeetingNotesNotYetHeldFutureMeeting() {
+        String meetingNote = "mulling over business problems, examining opportunities, exchanging rumors, spreading gossip";
+        manager.addFutureMeeting(contacts, futureDate);
+        manager.addMeetingNotes(1, meetingNote);
     }
 }
