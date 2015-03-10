@@ -791,4 +791,18 @@ public class ContactManagerTest {
 
         assertEquals(meetingNote1+space+meetingNote2, manager.getPastMeeting(1).getNotes());
     }
+    /**
+     * Testing adding meeting notes to past meeting with notes.
+     *
+     * Should @return the String meetingNote
+     */
+    @Test
+    public void testAddMeetingNotesPastMeetingWithoutNotes() {
+        String meetingNote = "We should have gone to Dorsia,I could have gotten us a table";
+        //n.b. need to edit constructor in MeetingImpl
+        manager.addNewPastMeeting(contacts, pastDate);
+        manager.addMeetingNotes(1, meetingNote);
+
+        assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
+    }
 }
