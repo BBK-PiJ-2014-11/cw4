@@ -805,4 +805,18 @@ public class ContactManagerTest {
 
         assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
     }
+    /**
+     * Testing adding meeting notes to a future meeting.
+     *
+     * Should @return the String meetingNote
+     */
+    @Test
+    public void testAddMeetingNotesFutureMeeting() {
+        Calendar thisPreciseMoment = new GregorianCalendar();
+        manager.addFutureMeeting(contacts, thisPreciseMoment);
+        String meetingNote = "We're going to Nell's. Gwendolyn's father is buying it";
+        manager.addMeetingNotes(1, meetingNote);
+
+        assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
+    }
 }
