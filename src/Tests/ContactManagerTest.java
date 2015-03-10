@@ -737,7 +737,7 @@ public class ContactManagerTest {
         //check list is chronologically sorted
         assertEquals(pastDate3, meetings.get(0).getDate());
         assertEquals(pastDate4, meetings.get(1).getDate());
-        assertEquals(pastDate5, meetings.get(3).getDate());
+        assertEquals(pastDate5, meetings.get(2).getDate());
     }
     /**
      * Testing getting the future meetings on a given date with no scheduled meetings
