@@ -746,7 +746,7 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetFutureMeetingListWithDateNoMeetings() {
-        manager.addNewContact("Marcus Halberstram","Card is Eggshell with Romalian type");
+        manager.addNewContact("David Van Patten","Card is Eggshell with Romalian type");
         newContacts = manager.getContacts(4);
         String meetingNote = "Went to Nell's with three models from Elite";
 
@@ -767,5 +767,28 @@ public class ContactManagerTest {
         //tests
         assertTrue(pastMeetings.isEmpty());
         assertTrue(futureMeetings.isEmpty());
+    }
+     /*
+    * BREAK HERE
+    *
+    *
+    * NEW TEST BATCH
+    *
+    *
+    */
+    /**
+     * Testing adding meeting notes to past meeting with notes.
+     *
+     * Should @return a concatenation of Strings meetingNote1+space+meetingNote2
+     */
+    @Test
+    public void testAddMeetingNotesPastMeetingWithNotes() {
+        String meetingNote1 = "Reservation under the name Marcus Halberstram";
+        String meetingNote2 = "The mud soup and charcoal arugula were outrageous";
+        String space = ". ";
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote1);
+        manager.addMeetingNotes(1, meetingNote2);
+
+        assertEquals(meetingNote1+space+meetingNote2, manager.getPastMeeting(1).getNotes());
     }
 }
