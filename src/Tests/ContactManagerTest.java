@@ -613,7 +613,7 @@ public class ContactManagerTest {
         newContacts = manager.getContacts(1);
         String meetingNote = "Decent table in Espace, the relief washed over me in an awesome wave ";
         String meetingNote2 = "Squash";
-        String meetingNote3 = "The menu was in bail";
+        String meetingNote3 = "The menu was in braille";
         String meetingNote4 = "I can believe that Price prefers Van Patten's card to mine";
 
         //create dates
@@ -746,6 +746,8 @@ public class ContactManagerTest {
      */
     @Test
     public void testGetFutureMeetingListWithDateNoMeetings() {
+        manager.addNewContact("Marcus Halberstram","Card is Eggshell with Romalian type");
+        newContacts = manager.getContacts(4);
         String meetingNote = "Went to Nell's with three models from Elite";
 
         //create dates
