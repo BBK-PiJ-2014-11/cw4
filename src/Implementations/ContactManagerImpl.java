@@ -124,7 +124,9 @@ public class ContactManagerImpl implements ContactManager {
     public List<Meeting> getFutureMeetingList(Calendar date) {
         List<Meeting> dateMeetings = new ArrayList<Meeting>();
         for (Meeting meeting : meetings) {
-            if(date.after(today)){
+            Boolean datesEquals = meeting.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
+                    meeting.getDate().get(Calendar.DAY_OF_YEAR) == date.get(Calendar.DAY_OF_YEAR);
+            if(datesEquals){
                 dateMeetings.add(meeting);
             }
         }
