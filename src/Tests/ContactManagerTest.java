@@ -842,4 +842,14 @@ public class ContactManagerTest {
         manager.addFutureMeeting(contacts, futureDate);
         manager.addMeetingNotes(1, meetingNote);
     }
+    /**
+     * Testing adding null meeting notes.
+     *
+     * Should @throw an NullPointerException
+     */
+    @Test(expected = NullPointerException.class)
+    public void testAddNullMeetingNotes() {
+        manager.addNewPastMeeting(contacts, pastDate);
+        manager.addMeetingNotes(1, null);
+    }
 }
