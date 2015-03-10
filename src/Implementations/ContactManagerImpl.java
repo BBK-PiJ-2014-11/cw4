@@ -122,8 +122,13 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public List<Meeting> getFutureMeetingList(Calendar date) {
-        //TODO
-        return null;
+        List<Meeting> dateMeetings = new ArrayList<Meeting>();
+        for (Meeting meeting : meetings) {
+            if(date.after(today)){
+                dateMeetings.add(meeting);
+            }
+        }
+        return dateMeetings;
     }
     /**
      * {@inheritDoc}
