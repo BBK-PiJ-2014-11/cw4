@@ -863,4 +863,22 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate);
         manager.addMeetingNotes(1, emptyNotes);
     }
+    /**
+     * Testing set meeting id.
+     *
+     * Should @return the id number 1000 (after adding 1000 meetings)
+     */
+    @Test
+    public void testSetMeetingId() {
+        Calendar today = new GregorianCalendar();
+        for(int i=0; i<1000; i++){
+            //increment the day by 1 for a 1000 days
+            today.add(Calendar.DAY_OF_YEAR,1);
+            manager.addFutureMeeting(contacts,today);
+        }
+        Contact bateman = findContact(contacts,"Patrick Bateman");
+        List<Meeting> meetings = manager.getFutureMeetingList(bateman);
+
+        assertEquals(1000,meetings.get(999).getId());
+    }
 }
