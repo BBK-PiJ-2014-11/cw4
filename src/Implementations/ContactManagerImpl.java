@@ -190,6 +190,16 @@ public class ContactManagerImpl implements ContactManager {
         if(text == null){
             throw new NullPointerException();
         }
+        if(meeting instanceof PastMeeting) {
+            int sameId = meeting.getId();
+            Set<Contact> sameContacts = meeting.getContacts();
+            Calendar sameDate = meeting.getDate();
+            String space = ". ";
+            PastMeeting pastMeeting = (PastMeeting) meeting;
+            String meetingNote = pastMeeting.getNotes() + space + text;
+            meetings.remove(meeting);
+            meetings.add(new PastMeetingImpl(sameId, sameDate, sameContacts, meetingNote));
+        }
     }
     /**
      * {@inheritDoc}
