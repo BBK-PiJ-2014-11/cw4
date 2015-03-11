@@ -864,6 +864,25 @@ public class ContactManagerTest {
         manager.addMeetingNotes(1, emptyNotes);
     }
     /**
+     * Testing set contact id.
+     *
+     * Should @return the id number 26 (after adding 26 contacts - A-Z)
+     */
+    @Test
+    public void testContactMeetingId() {
+        ContactManager newManager = new ContactManagerImpl();
+        //looping through alphabet
+        for(char alphabet = 'A'; alphabet <= 'Z'; alphabet++) {
+            //converts each char to a string - to add to CM
+            String str = new String(new char[] {alphabet});
+            newManager.addNewContact(str , str.toLowerCase() );
+        }
+        newContacts = newManager.getContacts(26);
+        assertTrue(contactFound(newContacts, "Z"));
+        assertEquals(26, findContact(newContacts, "Z").getId());
+        assertEquals("z", findContact(newContacts, "Z").getNotes());
+    }
+    /**
      * Testing set meeting id.
      *
      * Should @return the id number 1000 (after adding 1000 meetings)
