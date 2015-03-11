@@ -301,16 +301,16 @@ public class ContactManagerTest {
         String meetingNote = null;
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
-    /**
-     * Testing adding a past meeting with a empty notes
-     *
-     * Should @throw a NullPointerException
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddNewPastMeetingEmptyNotes() {
-        String meetingNote = "";
-        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
-    }
+//    /**
+//     * Testing adding a past meeting with a empty notes
+//     *
+//     * Should @throw a NullPointerException
+//     */
+//    @Test(expected = NullPointerException.class)
+//    public void testAddNewPastMeetingEmptyNotes() {
+//        String meetingNote = "";
+//        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+//    }
     /**
      * Testing adding a past meeting with a null date
      *
@@ -800,7 +800,7 @@ public class ContactManagerTest {
     public void testAddMeetingNotesPastMeetingWithoutNotes() {
         String meetingNote = "We should have gone to Dorsia,I could have gotten us a table";
         //n.b. need to edit constructor in MeetingImpl
-        manager.addNewPastMeeting(contacts, pastDate);
+        manager.addNewPastMeeting(contacts, pastDate,"");
         manager.addMeetingNotes(1, meetingNote);
 
         assertEquals(meetingNote, manager.getPastMeeting(1).getNotes());
@@ -849,20 +849,20 @@ public class ContactManagerTest {
      */
     @Test(expected = NullPointerException.class)
     public void testAddNullMeetingNotes() {
-        manager.addNewPastMeeting(contacts, pastDate);
+        manager.addNewPastMeeting(contacts, pastDate,"");
         manager.addMeetingNotes(1, null);
     }
-    /**
-     * Testing adding empty meeting notes.
-     *
-     * Should @throw an NullPointerException
-     */
-    @Test(expected = NullPointerException.class)
-    public void testAddEmptyMeetingNotes() {
-        String emptyNotes = "";
-        manager.addNewPastMeeting(contacts, pastDate);
-        manager.addMeetingNotes(1, emptyNotes);
-    }
+//    /**
+//     * Testing adding empty meeting notes.
+//     *
+//     * Should @throw an NullPointerException
+//     */
+//    @Test(expected = NullPointerException.class)
+//    public void testAddEmptyMeetingNotes() {
+//        String emptyNotes = "";
+//        manager.addNewPastMeeting(contacts, pastDate,"");
+//        manager.addMeetingNotes(1, emptyNotes);
+//    }
     /**
      * Testing set contact id.
      *
