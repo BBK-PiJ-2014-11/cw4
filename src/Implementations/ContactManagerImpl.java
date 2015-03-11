@@ -187,6 +187,9 @@ public class ContactManagerImpl implements ContactManager {
         if (meeting.getDate().after(today)) {
             throw new IllegalStateException();
         }
+        if(text == null){
+            throw new NullPointerException();
+        }
     }
     /**
      * {@inheritDoc}
