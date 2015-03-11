@@ -193,10 +193,15 @@ public class ContactManagerImpl implements ContactManager {
         if(meeting instanceof PastMeeting) {
             int sameId = meeting.getId();
             Set<Contact> sameContacts = meeting.getContacts();
+            String meetingNote;
             Calendar sameDate = meeting.getDate();
             String space = ". ";
             PastMeeting pastMeeting = (PastMeeting) meeting;
-            String meetingNote = pastMeeting.getNotes() + space + text;
+            if(!pastMeeting.getNotes().equals("")){
+                meetingNote = pastMeeting.getNotes() + space + text;
+            }else{
+                meetingNote = text;
+            }
             meetings.remove(meeting);
             meetings.add(new PastMeetingImpl(sameId, sameDate, sameContacts, meetingNote));
         }
