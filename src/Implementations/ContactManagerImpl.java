@@ -265,4 +265,8 @@ public class ContactManagerImpl implements ContactManager {
         });
         return meetingList;
     }
+    public Meeting convertMeeting(FutureMeeting meeting){
+        Meeting pastMeeting = new PastMeetingImpl(meeting.getId(),meeting.getDate(), meeting.getContacts(),"");
+        return pastMeeting;
+    }
 }
