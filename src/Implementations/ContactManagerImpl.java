@@ -110,11 +110,7 @@ public class ContactManagerImpl implements ContactManager {
                 contactMeetings.add(meeting);
             }
         }
-        Collections.sort(contactMeetings, new Comparator<Meeting>() {
-            public int compare(Meeting o1, Meeting o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        });
+        sortList(contactMeetings);
         return contactMeetings;
     }
     /**
@@ -130,11 +126,7 @@ public class ContactManagerImpl implements ContactManager {
                 dateMeetings.add(meeting);
             }
         }
-        Collections.sort(dateMeetings, new Comparator<Meeting>() {
-            public int compare(Meeting o1, Meeting o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        });
+        sortList(dateMeetings);
         return dateMeetings;
     }
     /**
