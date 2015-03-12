@@ -173,6 +173,10 @@ public class ContactManagerImpl implements ContactManager {
         if (contacts == null || date == null || text == null){  //|| text.equals("")) {
             throw new NullPointerException();
         }
+//        //not requested in the interface, but seem logical to have this check here...no?
+//        if (date.after(today)){
+//            throw new IllegalArgumentException();
+//        }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
     /**
@@ -258,5 +262,19 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public void flush() {
         //TODO
+    }
+    /**
+     * Returns a list of meeting sorted chronologically by meeting date
+     *
+     * @param meetingList a list of meetings
+     * @return the meetingList arranged by date and time
+     */
+    private List sortList(List<Meeting> meetingList) {
+        Collections.sort(meetingList, new Comparator<Meeting>() {
+            public int compare(Meeting o1, Meeting o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+        return meetingList;
     }
 }
