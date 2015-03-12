@@ -145,8 +145,7 @@ public class ContactManagerImpl implements ContactManager {
                 contactMeetings.add((PastMeeting)meeting);
             }
         }
-        //throws a wildcard - tests ok - more checking may be needed
-        sortList(((List<Meeting>)(List<? super PastMeeting>)contactMeetings));
+        sortList(contactMeetings);
         return contactMeetings;
     }
     /**
@@ -258,7 +257,7 @@ public class ContactManagerImpl implements ContactManager {
      * @param meetingList a list of meetings
      * @return the meetingList arranged by date and time
      */
-    private List sortList(List<Meeting> meetingList) {
+    private List sortList(List<? extends Meeting> meetingList) {
         Collections.sort(meetingList, new Comparator<Meeting>() {
             public int compare(Meeting o1, Meeting o2) {
                 return o1.getDate().compareTo(o2.getDate());
