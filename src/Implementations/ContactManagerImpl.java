@@ -204,6 +204,9 @@ public class ContactManagerImpl implements ContactManager {
             }
             meetings.remove(meeting);
             meetings.add(new PastMeetingImpl(sameId, sameDate, sameContacts, meetingNote));
+        }else{
+            meetings.remove(meeting);
+            meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), text));
         }
     }
     /**
