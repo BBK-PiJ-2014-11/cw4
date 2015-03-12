@@ -191,10 +191,7 @@ public class ContactManagerImpl implements ContactManager {
             throw new NullPointerException();
         }
         if(meeting instanceof PastMeeting) {
-            int sameId = meeting.getId();
-            Set<Contact> sameContacts = meeting.getContacts();
             String meetingNote;
-            Calendar sameDate = meeting.getDate();
             String space = ". ";
             PastMeeting pastMeeting = (PastMeeting) meeting;
             if(!pastMeeting.getNotes().equals("")){
@@ -203,7 +200,7 @@ public class ContactManagerImpl implements ContactManager {
                 meetingNote = text;
             }
             meetings.remove(meeting);
-            meetings.add(new PastMeetingImpl(sameId, sameDate, sameContacts, meetingNote));
+            meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), meetingNote));
         }else{
             meetings.remove(meeting);
             meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), text));
