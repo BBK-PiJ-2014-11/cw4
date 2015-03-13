@@ -191,7 +191,7 @@ public class ContactManagerImpl implements ContactManager {
             }
         }
         meetings.remove(meeting);
-        meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), meetingNote));
+        meetings.add(updateMeeting(meeting, meetingNote));
     }
     /**
      * {@inheritDoc}
