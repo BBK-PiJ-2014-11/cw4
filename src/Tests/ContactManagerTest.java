@@ -901,4 +901,45 @@ public class ContactManagerTest {
 
         assertEquals(1000,meetings.get(999).getId());
     }
+    /**
+     * Testing that programme data can be saved and retrieved from disk
+     *
+     * Should @return all data from the original Manager
+     */
+    @Test
+    public void testFlush() {
+        String note = "I had to return some videotapes";
+        //adds two meets to current manager
+        manager.addNewPastMeeting(contacts, pastDate, note);
+        manager.addFutureMeeting(contacts, futureDate);
+
+        //saves the date of current manager to disk
+        manager.flush();
+
+        //new manager session
+        ContactManager restoredManager = new ContactManagerImpl();
+
+        //get the resorted contacts
+        newContacts = restoredManager.getContacts(1,2,3);
+
+        //checking all contacts present
+        assertTrue(contactFound(newContacts,"Patrick Bateman"));
+        assertTrue(contactFound(newContacts, "Paul Owen"));
+        assertTrue(contactFound(newContacts, "Timothy Price"));
+
+        //checking past meeting data
+        assertEquals(pastDate, restoredManager.getPastMeeting(1).getDate());
+        assertEquals(note, restoredManager.getPastMeeting(1).getNotes());
+        Set<Contact> pastMeetingContacts = manager.getPastMeeting(1).getContacts();
+        assertTrue(contactFound(pastMeetingContacts,"Patrick Bateman"));
+        assertTrue(contactFound(pastMeetingContacts, "Paul Owen"));
+        assertTrue(contactFound(pastMeetingContacts, "Timothy Price"));
+
+        //checking future meeting data
+        assertEquals(futureDate, restoredManager.getFutureMeeting(2).getDate());
+        Set<Contact> futureMeetingContacts = manager.getPastMeeting(2).getContacts();
+        assertTrue(contactFound(futureMeetingContacts,"Patrick Bateman"));
+        assertTrue(contactFound(futureMeetingContacts, "Paul Owen"));
+        assertTrue(contactFound(futureMeetingContacts, "Timothy Price"));
+    }
 }
