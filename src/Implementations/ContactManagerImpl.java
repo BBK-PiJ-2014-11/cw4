@@ -265,8 +265,16 @@ public class ContactManagerImpl implements ContactManager {
         });
         return meetingList;
     }
-    public Meeting convertMeeting(FutureMeeting meeting){
-        Meeting pastMeeting = new PastMeetingImpl(meeting.getId(),meeting.getDate(), meeting.getContacts(),"");
+    /**
+     * Returns a new past meeting converted from existing future meeting
+     * with notes added
+     *
+     * @param meeting the future meeting to be converted
+     * @param note the note to be added to the meeting
+     * @return a new past meeting with same id, date and contacts as before
+     */
+    public Meeting convertMeeting(FutureMeeting meeting, String note){
+        Meeting pastMeeting = new PastMeetingImpl(meeting.getId(),meeting.getDate(), meeting.getContacts(),note);
         return pastMeeting;
     }
 }
