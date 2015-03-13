@@ -173,6 +173,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public void addMeetingNotes(int id, String text) {
         Meeting meeting = getMeeting(id);
+        String meetingNote = text;
         if (meeting == null) {
             throw new IllegalArgumentException();
         }
@@ -183,20 +184,14 @@ public class ContactManagerImpl implements ContactManager {
             throw new NullPointerException();
         }
         if(meeting instanceof PastMeeting) {
-            String meetingNote;
             String space = ". ";
             PastMeeting pastMeeting = (PastMeeting) meeting;
             if(!pastMeeting.getNotes().equals("")){
                 meetingNote = pastMeeting.getNotes() + space + text;
-            }else{
-                meetingNote = text;
             }
-            meetings.remove(meeting);
-            meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), meetingNote));
-        }else{
-            meetings.remove(meeting);
-            meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), text));
         }
+        meetings.remove(meeting);
+        meetings.add(new PastMeetingImpl(meeting.getId(), meeting.getDate(), meeting.getContacts(), meetingNote));
     }
     /**
      * {@inheritDoc}
