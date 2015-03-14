@@ -1,7 +1,6 @@
 package Interfaces;
 
 import java.io.File;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 
@@ -24,12 +23,17 @@ public interface XMLHandler {
     public void parseData(File file);
     /**
      * Creates a Document Object from contact manager data
+     *
+     * @param contacts the set of contacts from CM
+     * @param meetings the list of meetings from CM
+     * @param currentContactId the last assigned contact id
+     * @param currentMeetingId the last assigned meeting id
      */
-    public void createDocument(Set<Contact> contacts, List<Meeting> meetings, Calendar today, int currentContactId, int currentMeetingId);
+    public void createDocument(Set<Contact> contacts, List<Meeting> meetings, int currentContactId, int currentMeetingId);
     /**
      * Writes a Document Object to an XML file
      *
      * @param file the file to be written to
      */
-    public void writeFile(String file);
+    public void writeFile(File file);
 }
