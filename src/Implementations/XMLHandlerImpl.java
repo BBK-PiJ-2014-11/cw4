@@ -55,7 +55,7 @@ public class XMLHandlerImpl implements XMLHandler {
 
     }
     /**
-     * Creates a Document Object Model element to store text data
+     * Creates a Document Object Model(DOM) element to store text data
      *
      * @param name name of element to be created
      * @param text the text to be added to the element
@@ -78,6 +78,19 @@ public class XMLHandlerImpl implements XMLHandler {
         ele.appendChild(createTextElement("id", ""+ contact.getId()));
         ele.appendChild(createTextElement("name",""+ contact.getName()));
         ele.appendChild(createTextElement("notes",""+ contact.getNotes()));
+        return ele;
+    }
+    /**
+     * Creates a DOM element for a contact set.
+     *
+     * @param contacts the set to be created
+     * @return a DOM element listing contacts
+     */
+    private Element createContactListElement(Set<Contact> contacts){
+        Element ele = doc.createElement("contacts");
+        for(Contact contact : contacts){
+            ele.appendChild(createContactElement(contact));
+        }
         return ele;
     }
 }
