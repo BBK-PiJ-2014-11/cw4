@@ -2,6 +2,7 @@ package Implementations;
 
 import Interfaces.Contact;
 import Interfaces.Meeting;
+import Interfaces.PastMeeting;
 import Interfaces.XMLHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -103,6 +104,23 @@ public class XMLHandlerImpl implements XMLHandler {
         Element ele = doc.createElement("meeting");
         ele.appendChild(createTextElement("id", ""+meeting.getId()));
         ele.appendChild(createTextElement("date", ""+meeting.getDate()));
+        ele.appendChild(doc.createElement("contacts"));
+        for(Contact contact : meeting.getContacts()){
+            ele.appendChild(createTextElement("contacts", ""+contact.getName()));
+        }
+        return ele;
+    }
+    /**
+     * Creates a DOM element for a past meeting.
+     *
+     * @param meeting the past meeting to be created
+     * @return an element with text information about the meeting
+     */
+    private Element createPastMeetingElement(PastMeeting meeting){
+        Element ele = doc.createElement("meeting");
+        ele.appendChild(createTextElement("id", ""+meeting.getId()));
+        ele.appendChild(createTextElement("date", ""+meeting.getDate()));
+        ele.appendChild(createTextElement("notes", ""+meeting.getNotes()));
         ele.appendChild(doc.createElement("contacts"));
         for(Contact contact : meeting.getContacts()){
             ele.appendChild(createTextElement("contacts", ""+contact.getName()));
