@@ -4,6 +4,8 @@ import Interfaces.Contact;
 import Interfaces.Meeting;
 import Interfaces.XMLHandler;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Text;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -51,5 +53,18 @@ public class XMLHandlerImpl implements XMLHandler {
     @Override
     public void writeFile(File file) {
 
+    }
+    /**
+     * Creates a Document Object Model element to store text data
+     *
+     * @param name name of element to be created
+     * @param text the text to be added to the element
+     * @return an element with text information
+     */
+    private Element createTextElement(String name, String text){
+        Text txt = doc.createTextNode(text);
+        Element ele = doc.createElement(name);
+        ele.appendChild(txt);
+        return ele;
     }
 }
