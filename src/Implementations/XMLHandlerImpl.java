@@ -93,4 +93,20 @@ public class XMLHandlerImpl implements XMLHandler {
         }
         return ele;
     }
+    /**
+     * Creates a DOM element for a meeting.
+     *
+     * @param meeting the meeting to be created
+     * @return an element with text information about the meeting
+     */
+    private Element createMeetingElement(Meeting meeting){
+        Element ele = doc.createElement("meeting");
+        ele.appendChild(createTextElement("id", ""+meeting.getId()));
+        ele.appendChild(createTextElement("date", ""+meeting.getDate()));
+        ele.appendChild(doc.createElement("contacts"));
+        for(Contact contact : meeting.getContacts()){
+            ele.appendChild(createTextElement("contacts", ""+contact.getName()));
+        }
+        return ele;
+    }
 }
