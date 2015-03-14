@@ -67,4 +67,17 @@ public class XMLHandlerImpl implements XMLHandler {
         ele.appendChild(txt);
         return ele;
     }
+    /**
+     * Creates a DOM element for a contact.
+     *
+     * @param contact the contact to be stored
+     * @return an element with text information about the contact
+     */
+    private Element createContactElement(Contact contact){
+        Element ele = doc.createElement("contact");
+        ele.appendChild(createTextElement("id", ""+ contact.getId()));
+        ele.appendChild(createTextElement("name",""+ contact.getName()));
+        ele.appendChild(createTextElement("notes",""+ contact.getNotes()));
+        return ele;
+    }
 }
