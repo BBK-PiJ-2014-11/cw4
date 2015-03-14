@@ -913,7 +913,7 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate, note);
         manager.addFutureMeeting(contacts, futureDate);
 
-        //saves the date of current manager to disk
+        //saves the data of current manager to disk
         manager.flush();
 
         //new manager session
@@ -941,5 +941,30 @@ public class ContactManagerTest {
         assertTrue(contactFound(futureMeetingContacts,"Patrick Bateman"));
         assertTrue(contactFound(futureMeetingContacts, "Paul Owen"));
         assertTrue(contactFound(futureMeetingContacts, "Timothy Price"));
+    }
+    /**
+     * Testing attempt to save programme without data
+     *
+     * Should @return no data
+     */
+    @Test
+    public void testFlushNoData() {
+        // a new manager with no data
+        ContactManager newManager = new ContactManagerImpl();
+
+        //saves the data of current manager to disk (should be none)
+        newManager.flush();
+
+        //new manager session
+        ContactManager restoredManager = new ContactManagerImpl();
+
+        //get the resorted contacts
+        newContacts = restoredManager.getContacts(1,2,3);
+
+        //checking contact set empty
+        assertTrue(newContacts.isEmpty());
+
+        //checking no meetings saved
+        assertNull(restoredManager.getMeeting(1));
     }
 }
