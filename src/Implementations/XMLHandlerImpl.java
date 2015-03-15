@@ -17,6 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import java.io.File;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
 /**
@@ -115,7 +116,7 @@ public class XMLHandlerImpl implements XMLHandler {
      * @return a DOM element listing contacts
      */
     private Element createContactListElement(Set<Contact> contacts){
-        Element ele = doc.createElement("contacts");
+        Element ele = doc.createElement("contactList");
         for(Contact contact : contacts){
             ele.appendChild(createContactElement(contact));
         }
@@ -129,7 +130,16 @@ public class XMLHandlerImpl implements XMLHandler {
      */
     private Element createMeetingElement(Meeting meeting){
         Element ele = doc.createElement("meeting");
-        ele.appendChild(createTextElement("date", ""+meeting.getDate()));
+        int year = meeting.getDate().get(Calendar.YEAR);
+        int month = meeting.getDate().get(Calendar.MONTH);
+        int day = meeting.getDate().get(Calendar.DAY_OF_MONTH);
+        int hour = meeting.getDate().get(Calendar.HOUR_OF_DAY);
+        int minute = meeting.getDate().get(Calendar.MINUTE);
+        ele.appendChild(createTextElement("date", ""+year+"-"+month+"-"+day));
+        //if no time set - omit field from doc (no meetings at midnight)
+        if(!(hour == 0 && minute == 0)){
+            ele.appendChild(createTextElement("time",""+hour+":"+minute));
+        }
         ele.appendChild(doc.createElement("contacts"));
         for(Contact contact : meeting.getContacts()){
             ele.appendChild(createTextElement("contacts", ""+contact.getName()));
@@ -147,7 +157,7 @@ public class XMLHandlerImpl implements XMLHandler {
      * @return a DOC element describing the meetings.
      */
     private Element createMeetingListElement(List<? extends Meeting> meetings){
-        Element e = doc.createElement("meetingsList");
+        Element e = doc.createElement("meetingList");
         for(Meeting meeting : meetings){
             e.appendChild(createMeetingElement(meeting));
         }
