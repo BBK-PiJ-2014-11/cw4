@@ -109,8 +109,21 @@ public class XMLHandlerImpl implements XMLHandler {
         }
         if(meeting instanceof PastMeeting){
             PastMeeting pastMeeting = (PastMeeting)meeting;
-            ele.appendChild(createTextElement("notes", pastMeeting.getNotes()));
+            ele.appendChild(createTextElement("notes",""+ pastMeeting.getNotes()));
         }
         return ele;
+    }
+    /**
+     * Builds a DOM element for a List of meetings.
+     *
+     * @param meetings the list of meetings.
+     * @return a DOC element describing the meetings.
+     */
+    private Element createMeetingListElement(List<? extends Meeting> meetings){
+        Element e = doc.createElement("meetingsList");
+        for(Meeting meeting : meetings){
+            e.appendChild(createMeetingElement(meeting));
+        }
+        return e;
     }
 }
