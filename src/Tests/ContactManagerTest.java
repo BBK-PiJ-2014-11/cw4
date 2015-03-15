@@ -10,6 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.File;
 import java.util.*;
 
 import static org.junit.Assert.*;
@@ -900,6 +901,28 @@ public class ContactManagerTest {
         List<Meeting> meetings = manager.getFutureMeetingList(bateman);
 
         assertEquals(1000,meetings.get(999).getId());
+    }
+        /*
+    * BREAK HERE
+    *
+    *
+    * NEW TEST BATCH
+    *
+    *
+    */
+    /**
+     * Testing that an xml file is created on the first call of flush()
+     *
+     * Should @return true is file created, false if not
+     */
+    @Test
+    public void testCreateFile(){
+        File file = new File("contacts.xml");
+        String note = "I had to return some videotapes";
+        manager.addNewPastMeeting(contacts, pastDate, note);
+        manager.addFutureMeeting(contacts, futureDate);
+        manager.flush();
+        assertTrue(file.exists());
     }
     /**
      * Testing that programme data can be saved and retrieved from disk
