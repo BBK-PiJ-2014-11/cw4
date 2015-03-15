@@ -10,6 +10,7 @@ import org.w3c.dom.Text;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -28,7 +29,11 @@ public class XMLHandlerImpl implements XMLHandler {
 
     public XMLHandlerImpl(){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        //builder = factory.newDocumentBuilder();
+        try {
+            builder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            e.printStackTrace();
+        }
         doc = builder.newDocument();
     }
     /**
