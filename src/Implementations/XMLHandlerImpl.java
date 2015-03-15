@@ -11,6 +11,7 @@ import org.w3c.dom.Text;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -70,6 +71,10 @@ public class XMLHandlerImpl implements XMLHandler {
         try {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "5");
+            //transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION,"yes");
             DOMSource source = new DOMSource(doc);
             StreamResult result = new StreamResult(new File(file));
             transformer.transform(source, result);
