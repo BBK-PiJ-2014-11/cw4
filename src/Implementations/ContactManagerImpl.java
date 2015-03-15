@@ -244,7 +244,14 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public void flush() {
-        //TODO
+        try {
+            XMLHandlerImpl handle;
+            handle = new XMLHandlerImpl();
+            handle.createDocument(contacts, meetings, currentContactId, currentMeetingId);
+            handle.writeFile("contacts.xml");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     /**
      * Returns a list of meeting sorted chronologically by meeting date
