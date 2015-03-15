@@ -38,7 +38,7 @@ public class XMLHandlerImpl implements XMLHandler {
      * {@inheritDoc}
      */
     @Override
-    public void parseData(File file) {
+    public void parseData(String file) {
 
     }
     /**
@@ -52,7 +52,7 @@ public class XMLHandlerImpl implements XMLHandler {
      * {@inheritDoc}
      */
     @Override
-    public void writeFile(File file) {
+    public void writeFile(String file) {
 
     }
     /**
@@ -102,28 +102,14 @@ public class XMLHandlerImpl implements XMLHandler {
      */
     private Element createMeetingElement(Meeting meeting){
         Element ele = doc.createElement("meeting");
-        ele.appendChild(createTextElement("id", ""+meeting.getId()));
         ele.appendChild(createTextElement("date", ""+meeting.getDate()));
         ele.appendChild(doc.createElement("contacts"));
         for(Contact contact : meeting.getContacts()){
             ele.appendChild(createTextElement("contacts", ""+contact.getName()));
         }
-        return ele;
-    }
-    /**
-     * Creates a DOM element for a past meeting.
-     *
-     * @param meeting the past meeting to be created
-     * @return an element with text information about the meeting
-     */
-    private Element createPastMeetingElement(PastMeeting meeting){
-        Element ele = doc.createElement("meeting");
-        ele.appendChild(createTextElement("id", ""+meeting.getId()));
-        ele.appendChild(createTextElement("date", ""+meeting.getDate()));
-        ele.appendChild(createTextElement("notes", ""+meeting.getNotes()));
-        ele.appendChild(doc.createElement("contacts"));
-        for(Contact contact : meeting.getContacts()){
-            ele.appendChild(createTextElement("contacts", ""+contact.getName()));
+        if(meeting instanceof PastMeeting){
+            PastMeeting pastMeeting = (PastMeeting)meeting;
+            ele.appendChild(createTextElement("notes", pastMeeting.getNotes()));
         }
         return ele;
     }
