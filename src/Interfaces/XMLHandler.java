@@ -20,7 +20,7 @@ public interface XMLHandler {
      *
      * @param file the file to be read and parsed
      */
-    public void parseData(File file);
+    public void parseData(String file);
     /**
      * Creates a Document Object from contact manager data
      *
@@ -35,5 +35,5 @@ public interface XMLHandler {
      *
      * @param file the file to be written to
      */
-    public void writeFile(File file);
+    public void writeFile(String file);
 }
