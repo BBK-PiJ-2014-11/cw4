@@ -46,7 +46,12 @@ public class XMLHandlerImpl implements XMLHandler {
      */
     @Override
     public void createDocument(Set<Contact> contacts, List<Meeting> meetings, int currentContactId, int currentMeetingId) {
-
+        Element rootElement = doc.createElement("contactManager");
+        doc.appendChild(rootElement);
+        rootElement.appendChild(createContactListElement(contacts));
+        rootElement.appendChild(createMeetingListElement(meetings));
+        rootElement.appendChild(createTextElement("currentContactId", ""+currentContactId));
+        rootElement.appendChild(createTextElement("currentMeetingId", ""+currentMeetingId));
     }
     /**
      * {@inheritDoc}
