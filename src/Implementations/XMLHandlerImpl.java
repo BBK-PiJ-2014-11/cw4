@@ -16,6 +16,8 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.util.Calendar;
 import java.util.List;
@@ -28,6 +30,7 @@ import java.util.Set;
 public class XMLHandlerImpl implements XMLHandler {
     private DocumentBuilder builder;
     private Document doc;
+    private XPath path;
 
     public XMLHandlerImpl(){
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
@@ -37,6 +40,8 @@ public class XMLHandlerImpl implements XMLHandler {
             e.printStackTrace();
         }
         doc = builder.newDocument();
+        XPathFactory xpFactory = XPathFactory.newInstance();
+        path = xpFactory.newXPath();
     }
     /**
      * {@inheritDoc}
