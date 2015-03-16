@@ -1,6 +1,6 @@
 package Interfaces;
 
-import java.io.File;
+import javax.xml.xpath.XPathExpressionException;
 import java.util.List;
 import java.util.Set;
 
@@ -8,19 +8,6 @@ import java.util.Set;
  * A class read and write data to and from an XML file
  */
 public interface XMLHandler {
-    /**
-     * Checks if a file for Contact Manager exists and reads contents
-     * to a Document Object
-     *
-     * If no file exists a new one is created
-     */
-    public void readFile();
-    /**
-     * Parses an XML file containing Contact Manager data
-     *
-     * @param file the file to be read and parsed
-     */
-    public void parseData(String file);
     /**
      * Creates a Document Object from contact manager data
      *
@@ -36,4 +23,28 @@ public interface XMLHandler {
      * @param file the file to be written to
      */
     public void writeFile(String file);
+    /**
+     * Parses the current stored value of contact Id
+     *
+     * @return the last assigned contact Id
+     */
+    public int parseContactId();
+    /**
+     * Parses the current stored value of meeting Id
+     *
+     * @return the last assigned meeting Id
+     */
+    public int parseMeetingId();
+    /**
+     * Parses each stored contact and place them into a contact set
+     *
+     * @return a set of contacts.
+     */
+    public Set<Contact> parseContacts();
+    /**
+     * Parses each stored meeting and place them into a meeting list
+     *
+     * @return the List of meetings.
+     */
+    public List<Meeting> parseMeetings(Set<Contact> contacts) throws XPathExpressionException;
 }
