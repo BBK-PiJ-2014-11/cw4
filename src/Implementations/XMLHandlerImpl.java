@@ -92,7 +92,13 @@ public class XMLHandlerImpl implements XMLHandler {
 
     @Override
     public int parseMeetingId() {
-        return 0;
+        int currentMeetingId = 0;
+        try {
+            currentMeetingId  = Integer.parseInt(path.evaluate("/contactManager/currentMeetingId", doc));
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return currentMeetingId ;
     }
 
     @Override
