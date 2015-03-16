@@ -22,10 +22,8 @@ import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
+
 /**
  * {@inheritDoc}
  *
@@ -122,8 +120,54 @@ public class XMLHandlerImpl implements XMLHandler {
     }
 
     @Override
-    public List<Meeting> parseMeetings(Set<Contact> contacts) throws XPathExpressionException {
-        return null;
+    public List<Meeting> parseMeetings(Set<Contact> contacts){
+        List<Meeting> meetings = new ArrayList<>();
+        try {
+            int counter;
+            counter = Integer.parseInt(path.evaluate("count(/contactManager/meetingList/meeting)", doc));
+            for(int i = 1; i <= counter; i++){
+                int id = Integer.parseInt(path.evaluate("/contactManager/meetingList/meeting[" + i + "]/id", doc));
+
+                //date require the string to be broken down in component parts
+                String dateStr = path.evaluate("/contactManager/meetingList/meeting[" + i + "]/date", doc);
+                String timeStr = path.evaluate("/contactManager/meetingList/meeting[" + i + "]/time", doc);
+                String[] dateParts = dateStr.split("-");
+                String[] timeParts = timeStr.split("-");
+                int year = Integer.parseInt(dateParts[0]);
+                int month = Integer.parseInt(dateParts[1]);
+                int day = Integer.parseInt(dateParts[2]);
+                int hour = 0;
+                int minute = 0;
+                if(!timeParts[0].equals("")&&timeParts[0].equals("")){
+                    hour = Integer.parseInt(timeParts[0]);
+                    minute = Integer.parseInt(timeParts[1]);
+                }
+                Calendar date = new GregorianCalendar(year, month, day, hour, minute);
+
+                int newCounter;
+                newCounter = Integer.parseInt(path.evaluate("count(/contactManager/meetingList/meetings[" + i + "]/contacts)", doc));
+                Set<Contact> newContacts = new HashSet<>();
+                for(int j = 1; j <= newCounter; j++){
+                    int contactName = Integer.parseInt(path.evaluate("/contactManager/meetingsList/meetings[" + i + "]/contacts/name", doc));
+                    for(Contact contact : contacts){
+                        if(contact.getName().equals(contactName)){
+                            newContacts.add(contact);
+                        }
+                    }
+                }
+                String notes = path.evaluate("/contactManager/meetingList/meetings["+i+"]/notes", doc);
+                Meeting newMeet;
+                if(notes.equals("")){
+                    newMeet = new FutureMeetingImpl(id, date,  newContacts);
+                } else {
+                    newMeet = new PastMeetingImpl(id, date, newContacts,notes);
+                }
+                meetings.add(newMeet);
+            }
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return meetings;
     }
 
     /**
