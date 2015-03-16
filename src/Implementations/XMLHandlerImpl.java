@@ -50,27 +50,6 @@ public class XMLHandlerImpl implements XMLHandler {
      * {@inheritDoc}
      */
     @Override
-    public void readFile() {
-
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public void parseData(String file) {
-        File newfile = new File(file);
-        try {
-            doc = builder.parse(newfile);
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public void createDocument(Set<Contact> contacts, List<Meeting> meetings, int currentContactId, int currentMeetingId) {
         Element rootElement = doc.createElement("contactManager");
         doc.appendChild(rootElement);
@@ -97,6 +76,34 @@ public class XMLHandlerImpl implements XMLHandler {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int parseContactId() {
+        return 0;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int parseMeetingId() {
+        return 0;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Set<Contact> parseContacts() {
+        return null;
+    }
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public List<Meeting> parseMeetings(Set<Contact> contacts) throws XPathExpressionException {
+        return null;
     }
     /**
      * Creates a Document Object Model(DOM) element to store text data
