@@ -80,9 +80,14 @@ public class XMLHandlerImpl implements XMLHandler {
         }
     }
 
-    @Override
     public int parseContactId() {
-        return 0;
+        int currentContactId = 0;
+        try {
+            currentContactId = Integer.parseInt(path.evaluate("/contactManager/currentContactId", doc));
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return currentContactId;
     }
 
     @Override
