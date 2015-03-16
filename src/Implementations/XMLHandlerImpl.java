@@ -217,6 +217,7 @@ public class XMLHandlerImpl implements XMLHandler {
      */
     private Element createMeetingElement(Meeting meeting){
         Element ele = doc.createElement("meeting");
+        ele.appendChild(createTextElement("id", ""+meeting.getId()));
         int year = meeting.getDate().get(Calendar.YEAR);
         int month = meeting.getDate().get(Calendar.MONTH);
         int day = meeting.getDate().get(Calendar.DAY_OF_MONTH);
