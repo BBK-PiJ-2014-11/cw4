@@ -23,6 +23,7 @@ import javax.xml.xpath.XPathFactory;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 /**
@@ -103,7 +104,21 @@ public class XMLHandlerImpl implements XMLHandler {
 
     @Override
     public Set<Contact> parseContacts() {
-        return null;
+        Set<Contact> contacts = new HashSet<>();
+        try {
+            int counter;
+            counter = Integer.parseInt(path.evaluate("count(/contactManager/contactList/contact)", doc));
+            for(int i = 1; i <= counter; i++){
+                int id = Integer.parseInt(path.evaluate("/contactManager/contactList/contact[" + i + "]/id", doc));
+                String name = path.evaluate("/contactManager/contactList/contact[" + i + "]/name", doc);
+                String notes = path.evaluate("/contactManager/contactList/contact[" + i + "]/notes", doc);
+                Contact contact = new ContactImpl(id, name, notes);
+                contacts.add(contact);
+            }
+        } catch (XPathExpressionException e) {
+            e.printStackTrace();
+        }
+        return contacts;
     }
 
     @Override
