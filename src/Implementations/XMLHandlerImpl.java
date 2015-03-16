@@ -35,16 +35,18 @@ public class XMLHandlerImpl implements XMLHandler {
     private Document doc;
     private XPath path;
 
-    public XMLHandlerImpl(){
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+    public XMLHandlerImpl(String file) {
         try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             builder = factory.newDocumentBuilder();
-        } catch (ParserConfigurationException e) {
+            doc = builder.newDocument();
+            File f = new File(file);
+            doc = builder.parse(f);
+            XPathFactory xpFactory = XPathFactory.newInstance();
+            path = xpFactory.newXPath();
+        } catch (ParserConfigurationException | SAXException | IOException e) {
             e.printStackTrace();
         }
-        doc = builder.newDocument();
-        XPathFactory xpFactory = XPathFactory.newInstance();
-        path = xpFactory.newXPath();
     }
     /**
      * {@inheritDoc}
@@ -77,34 +79,27 @@ public class XMLHandlerImpl implements XMLHandler {
             e.printStackTrace();
         }
     }
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public int parseContactId() {
         return 0;
     }
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public int parseMeetingId() {
         return 0;
     }
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public Set<Contact> parseContacts() {
         return null;
     }
-    /**
-     * {@inheritDoc}
-     */
+
     @Override
     public List<Meeting> parseMeetings(Set<Contact> contacts) throws XPathExpressionException {
         return null;
     }
+
     /**
      * Creates a Document Object Model(DOM) element to store text data
      *
