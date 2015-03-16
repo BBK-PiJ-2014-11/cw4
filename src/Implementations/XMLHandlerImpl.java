@@ -7,6 +7,7 @@ import Interfaces.XMLHandler;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Text;
+import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -17,8 +18,10 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.xpath.XPath;
+import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Set;
@@ -55,7 +58,14 @@ public class XMLHandlerImpl implements XMLHandler {
      */
     @Override
     public void parseData(String file) {
-
+        File newfile = new File(file);
+        try {
+            doc = builder.parse(newfile);
+        } catch (SAXException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     /**
      * {@inheritDoc}
@@ -162,10 +172,10 @@ public class XMLHandlerImpl implements XMLHandler {
      * @return a DOC element describing the meetings.
      */
     private Element createMeetingListElement(List<? extends Meeting> meetings){
-        Element e = doc.createElement("meetingList");
+        Element ele = doc.createElement("meetingList");
         for(Meeting meeting : meetings){
-            e.appendChild(createMeetingElement(meeting));
+            ele.appendChild(createMeetingElement(meeting));
         }
-        return e;
+        return ele;
     }
 }
