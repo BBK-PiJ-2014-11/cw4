@@ -264,10 +264,9 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public void flush() {
         try {
-            XMLHandlerImpl handle;
-            handle = new XMLHandlerImpl();
+            handle = new XMLHandlerImpl(file);
             handle.createDocument(contacts, meetings, currentContactId, currentMeetingId);
-            handle.writeFile("contacts.xml");
+            handle.writeFile(file);
         } catch (Exception e) {
             e.printStackTrace();
         }
