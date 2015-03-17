@@ -1,7 +1,12 @@
 package Implementations;
 
 import Interfaces.*;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.xpath.XPathExpressionException;
+import java.io.File;
+import java.io.IOException;
 import java.util.*;
 /**
  * {@inheritDoc}
@@ -12,20 +17,34 @@ public class ContactManagerImpl implements ContactManager {
 
     private Set<Contact> contacts;
     private List<Meeting> meetings;
-    private Calendar today;
     private int currentContactId;
     private int currentMeetingId;
+    private Calendar today = new GregorianCalendar();
+    private String file = "contacts.xml";
+    private  XMLHandler handle;
     /**
      * ContactManagerImpl class constructor
      *
      * Create a new manager.
      */
     public ContactManagerImpl(){
-        contacts = new HashSet<Contact>();
-        meetings = new ArrayList<Meeting>();
-        today = new GregorianCalendar();
-        currentContactId = 0;
-        currentMeetingId = 0;
+        File newFile = new File(file);
+        if(newFile.exists()){
+            try {
+                handle = new XMLHandlerImpl(file);
+                contacts = handle.parseContacts();
+                meetings = handle.parseMeetings(contacts);
+                currentContactId = handle.parseContactId();
+                currentMeetingId = handle.parseMeetingId();
+            } catch (XPathExpressionException e) {
+                e.printStackTrace();
+            }
+        }else{
+            contacts = new HashSet<Contact>();
+            meetings = new ArrayList<Meeting>();
+            currentContactId = 0;
+            currentMeetingId = 0;
+        }
     }
     /**
      * Methods to assign a contact id, increments value every time called
