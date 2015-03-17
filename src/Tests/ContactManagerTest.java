@@ -32,7 +32,7 @@ public class ContactManagerTest {
         manager = new ContactManagerImpl();
         manager.addNewContact("Patrick Bateman", "A big Genesis fan ever since the release of their 1980 album 'Duke'");
         manager.addNewContact("Paul Owen","Handling the Fisher account...lucky b******");
-        manager.addNewContact("Timothy Price","He presents himself as a harmless old codger. But inside…");
+        manager.addNewContact("Timothy Price","He presents himself as a harmless old codger. But inside...");
         contacts = manager.getContacts(1,2,3);
         newContacts = new HashSet<Contact>();
     }
@@ -989,5 +989,33 @@ public class ContactManagerTest {
 
         //checking no meetings saved
         assertNull(restoredManager.getMeeting(1));
+    }
+    /**
+     * Testing that programme file is deleted before new current managers session
+     * is saved. Restored data should not contain duplicates.
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testFlushRestoreDuplicates() {
+        String note = "I had to return some videotapes";
+        //adds two meetings to current manager - contact set contains 3 contacts
+        manager.addNewPastMeeting(contacts, pastDate, note);
+        manager.addFutureMeeting(contacts, futureDate);
+
+        //saves the data to new file
+        manager.flush();
+
+        //new manager session
+        ContactManager restoredManager = new ContactManagerImpl();
+
+        //save the data to existing file
+        restoredManager.flush();
+
+        //3rd manager session
+        ContactManager thirdManager = new ContactManagerImpl();
+
+        //get the resorted contacts from 3rd session (should only be 3)
+        thirdManager.getContacts(1,2,3,4,5,6);
     }
 }
