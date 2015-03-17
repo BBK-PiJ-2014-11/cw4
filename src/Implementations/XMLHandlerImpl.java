@@ -150,7 +150,7 @@ public class XMLHandlerImpl implements XMLHandler {
                 Set<Contact> newContacts = new HashSet<>();
                 for(int j = 1; j <= newCounter; j++){
                     //evaluate here
-                    int contactName = Integer.parseInt(path.evaluate("/contactManager/meetingsList/meeting[" + i + "]/contacts", parseDoc));
+                    String contactName = (path.evaluate("/contactManager/meetingsList/meeting[" + i + "]/contacts/name", parseDoc));
                     for(Contact contact : contacts){
                         if(contact.getName().equals(contactName)){
                             newContacts.add(contact);
@@ -232,7 +232,7 @@ public class XMLHandlerImpl implements XMLHandler {
         }
         ele.appendChild(doc.createElement("contacts"));
         for(Contact contact : meeting.getContacts()){
-            ele.appendChild(createTextElement("contacts", ""+contact.getName()));
+            ele.appendChild(createTextElement("name", ""+contact.getName()));
         }
         if(meeting instanceof PastMeeting){
             PastMeeting pastMeeting = (PastMeeting)meeting;
