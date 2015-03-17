@@ -259,6 +259,10 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public void flush() {
+        File newFile = new File(file);
+        if (newFile.exists()) {
+            newFile.delete();
+        }
         try {
             handle = new XMLHandlerImpl(file);
             handle.createDocument(contacts, meetings, currentContactId, currentMeetingId);
