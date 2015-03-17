@@ -966,6 +966,31 @@ public class ContactManagerTest {
         assertTrue(contactFound(futureMeetingContacts, "Timothy Price"));
     }
     /**
+     * Testing that meeting date format (date + time) can be correctly constructed
+     * by the xml parser and retrieved from disk
+     *
+     * Should @return the calendar objects pastDate1 and futureDate1
+     */
+    @Test
+    public void testFlushCheckMeetingTime() {
+        String note = "I had to return some videotapes";
+        //adds two meets to current manager
+        Calendar pastDate1 = new GregorianCalendar(2010, 11, 11, 11, 00);
+        Calendar futureDate1 = new GregorianCalendar(2015, 11, 11, 11, 00);
+        manager.addNewPastMeeting(contacts, pastDate1, note);
+        manager.addFutureMeeting(contacts, futureDate1);
+
+        //saves the data of current manager to disk
+        manager.flush();
+
+        //new manager session
+        ContactManager restoredManager = new ContactManagerImpl();
+
+        //checking meeting date includes a time
+        assertEquals(pastDate1, restoredManager.getPastMeeting(1).getDate());
+        assertEquals(futureDate1, restoredManager.getFutureMeeting(2).getDate());
+    }
+    /**
      * Testing attempt to save programme without data
      *
      * Should @return no data
