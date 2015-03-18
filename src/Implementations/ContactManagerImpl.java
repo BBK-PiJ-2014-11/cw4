@@ -294,7 +294,7 @@ public class ContactManagerImpl implements ContactManager {
      * @param note the note to be added to the meeting
      * @return a new past meeting with same id, date and contacts as before
      */
-    public Meeting updateMeeting(Meeting meeting, String note){
+    private Meeting updateMeeting(Meeting meeting, String note){
         PastMeeting pastMeeting = new PastMeetingImpl(meeting.getId(),meeting.getDate(), meeting.getContacts(),note);
         return pastMeeting;
     }
