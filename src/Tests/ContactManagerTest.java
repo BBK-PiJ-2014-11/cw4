@@ -283,16 +283,16 @@ public class ContactManagerTest {
         assertTrue(contactFound(testContacts, "Timothy Price"));
     }
     //NEED TO REVIEW - CAN A PAST MEETING BE CREATED IN THE FUTURE
-//    /**
-//     * Testing adding a past meeting with a future date
-//     *
-//     * Should @throw a IllegalArgumentException
-//     */
-//    @Test(expected = IllegalArgumentException.class)
-//    public void testAddNewPastMeetingFutureDate() {
-//        String meetingNote = "We had the peanut butter soup...with smoked duck and mashed squash.";
-//        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
-//    }
+    /**
+     * Testing adding a past meeting with a future date
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddNewPastMeetingFutureDate() {
+        String meetingNote = "We had the peanut butter soup...with smoked duck and mashed squash.";
+        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
+    }
     /**
      * Testing adding a past meeting with a null notes
      *
