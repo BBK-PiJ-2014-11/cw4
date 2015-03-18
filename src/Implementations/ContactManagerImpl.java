@@ -135,9 +135,7 @@ public class ContactManagerImpl implements ContactManager {
     public List<Meeting> getFutureMeetingList(Calendar date) {
         List<Meeting> dateMeetings = new ArrayList<Meeting>();
         for (Meeting meeting : meetings) {
-            Boolean datesEquals = meeting.getDate().get(Calendar.YEAR) == date.get(Calendar.YEAR) &&
-                    meeting.getDate().get(Calendar.DAY_OF_YEAR) == date.get(Calendar.DAY_OF_YEAR);
-            if(datesEquals){
+            if(datesEqual(meeting.getDate(),date)){
                 dateMeetings.add(meeting);
             }
         }
@@ -296,5 +294,20 @@ public class ContactManagerImpl implements ContactManager {
     public Meeting updateMeeting(Meeting meeting, String note){
         PastMeeting pastMeeting = new PastMeetingImpl(meeting.getId(),meeting.getDate(), meeting.getContacts(),note);
         return pastMeeting;
+    }
+    /**
+     * A method to checks whether two dates are the same
+     *
+     * @param date1 the first calendar object
+     * @param date2 the second calendar object
+     * @return true if the dates are the same, false if not
+     */
+    private boolean datesEqual(Calendar date1, Calendar date2) {
+        if (date1.get(Calendar.YEAR) != date2.get(Calendar.YEAR)) {
+            return false;
+        } else if (date1.get(Calendar.DAY_OF_YEAR) != date2.get(Calendar.DAY_OF_YEAR)) {
+            return false;
+        }
+        return true;
     }
 }
