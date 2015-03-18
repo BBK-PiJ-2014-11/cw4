@@ -3,9 +3,6 @@ package Implementations;
 import Interfaces.*;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
 import java.util.*;
 /**
  * {@inheritDoc}
