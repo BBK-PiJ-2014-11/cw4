@@ -3,6 +3,9 @@ package Implementations;
 import Interfaces.*;
 import javax.xml.xpath.XPathExpressionException;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Writer;
 import java.util.*;
 /**
  * {@inheritDoc}
@@ -174,10 +177,10 @@ public class ContactManagerImpl implements ContactManager {
         if (contacts == null || date == null || text == null){  //|| text.equals("")) {
             throw new NullPointerException();
         }
-//        //not requested in the interface, but seem logical to have this check here...no?
-//        if (date.after(today)){
-//            throw new IllegalArgumentException();
-//        }
+       //not requested in the interface, but seem logical to have this check here...no?
+        if (date.after(today)){
+            throw new IllegalArgumentException();
+        }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
     /**
