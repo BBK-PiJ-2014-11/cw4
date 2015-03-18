@@ -960,7 +960,7 @@ public class ContactManagerTest {
 
         //checking future meeting data
         assertEquals(futureDate, restoredManager.getFutureMeeting(2).getDate());
-        Set<Contact> futureMeetingContacts = manager.getPastMeeting(2).getContacts();
+        Set<Contact> futureMeetingContacts = manager.getFutureMeeting(2).getContacts();
         assertTrue(contactFound(futureMeetingContacts,"Patrick Bateman"));
         assertTrue(contactFound(futureMeetingContacts, "Paul Owen"));
         assertTrue(contactFound(futureMeetingContacts, "Timothy Price"));
