@@ -133,13 +133,13 @@ public class XMLHandlerImpl implements XMLHandler {
                 String dateStr = path.evaluate("/contactManager/meetingList/meeting[" + i + "]/date", parseDoc);
                 String timeStr = path.evaluate("/contactManager/meetingList/meeting[" + i + "]/time", parseDoc);
                 String[] dateParts = dateStr.split("-");
-                String[] timeParts = timeStr.split("-");
+                String[] timeParts = timeStr.split(":");
                 int year = Integer.parseInt(dateParts[0]);
                 int month = Integer.parseInt(dateParts[1]);
                 int day = Integer.parseInt(dateParts[2]);
                 int hour = 0;
                 int minute = 0;
-                if(!timeParts[0].equals("")&&timeParts[0].equals("")){
+                if(!timeStr.equals("")){
                     hour = Integer.parseInt(timeParts[0]);
                     minute = Integer.parseInt(timeParts[1]);
                 }
