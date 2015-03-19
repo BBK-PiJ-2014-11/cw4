@@ -1008,12 +1008,6 @@ public class ContactManagerTest {
         //new manager session
         ContactManager restoredManager = new ContactManagerImpl();
 
-        //get the resorted contacts
-        newContacts = restoredManager.getContacts(1,2,3);
-
-        //checking contact set empty
-        assertTrue(newContacts.isEmpty());
-
         //checking no meetings saved
         assertNull(restoredManager.getMeeting(1));
     }
