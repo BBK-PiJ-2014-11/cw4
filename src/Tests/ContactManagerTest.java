@@ -275,7 +275,7 @@ public class ContactManagerTest {
     @Test
     public void testAddNewPastMeetingCheckContacts() {
         String meetingNote = "I was wearing a wool tweed suit and a striped cotton shirt, both by Yves Saint Laurent";
-        manager.addNewPastMeeting(contacts, futureDate, meetingNote);
+        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
         Set<Contact> testContacts = new HashSet<Contact>();
         testContacts = manager.getMeeting(1).getContacts();
         assertTrue(contactFound(testContacts,"Patrick Bateman"));
