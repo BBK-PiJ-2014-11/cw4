@@ -24,6 +24,7 @@ public class ContactManagerTest {
     private Set<Contact> newContacts;
     private final Calendar pastDate = new GregorianCalendar(2011,11,11);
     private final Calendar futureDate = new GregorianCalendar(2015,11,11);
+    private final File file = new File("contacts.xml");
     /**
      * TestContact Manager constructor
      */
@@ -44,6 +45,7 @@ public class ContactManagerTest {
         manager = null;
         contacts = null;
         newContacts = null;
+        file.delete();
     }
     /**
      * Method to check whether a given set contains a contact depending on name
