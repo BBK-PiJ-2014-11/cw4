@@ -149,7 +149,6 @@ public class XMLHandlerImpl implements XMLHandler {
                 newCounter = Integer.parseInt(path.evaluate("count(/contactManager/meetingList/meeting[" + i + "]/contacts)", parseDoc));
                 Set<Contact> newContacts = new HashSet<>();
                 for(int j = 1; j <= newCounter; j++){
-                    //evaluate here
                     String contactName = (path.evaluate("/contactManager/meetingsList/meeting[" + i + "]/contacts/name", parseDoc));
                     for(Contact contact : contacts){
                         if(contact.getName().equals(contactName)){
@@ -159,10 +158,12 @@ public class XMLHandlerImpl implements XMLHandler {
                 }
                 String notes = path.evaluate("/contactManager/meetingList/meeting["+i+"]/notes", parseDoc);
                 Meeting meeting;
-                if(notes.equals("")){
-                    meeting = new FutureMeetingImpl(id, date,newContacts);
+                Calendar today = new GregorianCalendar();
+                //ensures that meetings become an instance of either past or future depending on the time the data is loaded
+                if(date.after(today)){
+                    meeting = new FutureMeetingImpl(id, date, newContacts);
                 } else {
-                    meeting = new PastMeetingImpl(id, date, newContacts,notes);
+                    meeting = new PastMeetingImpl(id, date, newContacts, notes);
                 }
                 meetings.add(meeting);
             }
