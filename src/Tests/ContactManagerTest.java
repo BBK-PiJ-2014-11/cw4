@@ -78,6 +78,11 @@ public class ContactManagerTest {
         }
         return null;
     }
+    /*
+    *
+    * TEST BATCH FOR ADD NEW CONTACT
+    *
+    */
     /**
      * Testing adding a new contact to new manager
      *
@@ -118,6 +123,11 @@ public class ContactManagerTest {
         String newNote = null;
         manager.addNewContact(newName, newNote);
     }
+    /*
+    *
+    * TEST BATCH FOR GET CONTACT WITH ID
+    *
+    */
     /**
      * Testing getting contact by id
      *
@@ -146,6 +156,11 @@ public class ContactManagerTest {
     public void testGetContactsUnusedId(){
         manager.getContacts(4);
     }
+    /*
+    *
+    * TEST BATCH FOR GET CONTACT WITH STRING
+    *
+    */
     /**
      * Testing getting contact by string
      *
@@ -195,6 +210,11 @@ public class ContactManagerTest {
         manager.addNewContact(newName,newNote);
         assertSame(manager.getContacts(0),NullPointerException.class);
     }
+    */
+    /*
+    *
+    * TEST BATCH FOR ADD FUTURE MEETING
+    *
     */
     /**
      * Testing adding a future meeting to manager
@@ -258,6 +278,11 @@ public class ContactManagerTest {
     public void testGetMeetingNonExistent() {
         assertNull(manager.getMeeting(11));
     }
+        /*
+    *
+    * TEST BATCH FOR ADD NEW PAST MEETING
+    *
+    */
     /**
      * Testing adding a new past meeting
      *
@@ -359,6 +384,10 @@ public class ContactManagerTest {
         contacts.add(new ContactImpl(4, "Marcus Halberstram"));
         manager.addNewPastMeeting(contacts, futureDate, meetingNote);
     }
+        /*
+    *
+    * TEST BATCH FOR GET PAST MEETING
+    */
     /**
      * Testing getting past meeting
      *
@@ -414,6 +443,11 @@ public class ContactManagerTest {
     public void testGetPastMeetingNonExistent() {
         assertNull(manager.getPastMeeting(11));
     }
+        /*
+    *
+    * TEST BATCH FOR GET FUTURE MEETING
+    *
+    */
     /**
      * Testing getting future meeting
      *
@@ -423,6 +457,7 @@ public class ContactManagerTest {
      * Should @return the calender object newDate the boolean
      * found for each of the tested contact for  the second meeting (ID = 2)
      */
+
     @Test
     public void testGetFutureMeeting() {
         //first future meeting
@@ -467,11 +502,8 @@ public class ContactManagerTest {
         assertNull(manager.getFutureMeeting(11));
     }
     /*
-    * BREAK HERE
     *
-    *
-    * NEW TEST BATCH
-    *
+    * TEST BATCH FOR GET FUTURE MEETING LIST WITH CONTACT
     *
     */
     /**
@@ -573,6 +605,11 @@ public class ContactManagerTest {
      * Should @return a list containing meeting id, date, notes and contact set for
      * both meetings
      */
+        /*
+    *
+    * TEST BATCH FOR GET PAST MEETING LIST WITH CONTACT
+    *
+    */
     @Test
     public void getPastMeetingList() {
         Calendar pastDate1 = new GregorianCalendar(1985, 11, 11);
@@ -665,6 +702,11 @@ public class ContactManagerTest {
         Contact halberstram = new ContactImpl(4, "Marcus Halberstram");
         manager.getPastMeetingList(halberstram);
     }
+        /*
+    *
+    * TEST BATCH FOR GET MEETING LIST WITH DATE
+    *
+    */
     /**
      * Testing getting the future meetings on a given date
      *
@@ -772,12 +814,9 @@ public class ContactManagerTest {
         assertTrue(pastMeetings.isEmpty());
         assertTrue(futureMeetings.isEmpty());
     }
-     /*
-    * BREAK HERE
+    /*
     *
-    *
-    * NEW TEST BATCH
-    *
+    * TEST BATCH FOR ADD MEETING NOTES
     *
     */
     /**
@@ -867,6 +906,11 @@ public class ContactManagerTest {
 //        manager.addNewPastMeeting(contacts, pastDate,"");
 //        manager.addMeetingNotes(1, emptyNotes);
 //    }
+    /*
+    *
+    * TEST BATCH FOR ID ASSIGNMENT
+    *
+    */
     /**
      * Testing set contact id.
      *
@@ -904,12 +948,9 @@ public class ContactManagerTest {
 
         assertEquals(1000,meetings.get(999).getId());
     }
-        /*
-    * BREAK HERE
+    /*
     *
-    *
-    * NEW TEST BATCH
-    *
+    * TEST BATCH FOR FLUSH
     *
     */
     /**
