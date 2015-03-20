@@ -193,6 +193,19 @@ public class ContactManagerTest {
     public void testGetContactsEmptyString() {
         manager.getContacts("");
     }
+    /**
+     * Testing getting multiple contact with a string
+     *
+     * Should @return the size of the contact set and the boolean found
+     */
+    @Test
+    public void testGetMultipleContactsString() {
+        manager.addNewContact("Sean Bateman", "Rock'n'Roll...deal with it'");
+        newContacts = manager.getContacts("Bateman");
+        assertEquals(2, newContacts.size());
+        assertTrue(contactFound(newContacts,"Patrick Bateman"));
+        assertTrue(contactFound(newContacts,"Sean Bateman"));
+    }
     /*
     IGNORE FOR NOW
     @Test
