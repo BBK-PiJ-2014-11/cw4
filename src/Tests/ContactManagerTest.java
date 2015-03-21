@@ -207,24 +207,6 @@ public class ContactManagerTest {
         assertTrue(contactFound(newContacts,"Sean Bateman"));
     }
     /*
-    IGNORE FOR NOW
-    @Test
-    public void testAddContactWithoutName(){
-        String newName = null;
-        String newNote = "A guy who looks a lot like Luis Carruthers";
-        manager.addNewContact(newName,newNote);
-        assertSame(manager.getContacts(0),NullPointerException.class);
-    }
-
-    @Test
-    public void testAddContactWithoutNotes(){
-        String newName = "Luis Carruthers";
-        String newNote = null;
-        manager.addNewContact(newName,newNote);
-        assertSame(manager.getContacts(0),NullPointerException.class);
-    }
-    */
-    /*
     *
     * TEST BATCH FOR ADD FUTURE MEETING
     *
@@ -343,16 +325,6 @@ public class ContactManagerTest {
         String meetingNote = null;
         manager.addNewPastMeeting(contacts, pastDate, meetingNote);
     }
-//    /**
-//     * Testing adding a past meeting with a empty notes
-//     *
-//     * Should @throw a NullPointerException
-//     */
-//    @Test(expected = NullPointerException.class)
-//    public void testAddNewPastMeetingEmptyNotes() {
-//        String meetingNote = "";
-//        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
-//    }
     /**
      * Testing adding a past meeting with a null date
      *
@@ -908,17 +880,6 @@ public class ContactManagerTest {
         manager.addNewPastMeeting(contacts, pastDate,"");
         manager.addMeetingNotes(1, null);
     }
-//    /**
-//     * Testing adding empty meeting notes.
-//     *
-//     * Should @throw an NullPointerException
-//     */
-//    @Test(expected = NullPointerException.class)
-//    public void testAddEmptyMeetingNotes() {
-//        String emptyNotes = "";
-//        manager.addNewPastMeeting(contacts, pastDate,"");
-//        manager.addMeetingNotes(1, emptyNotes);
-//    }
     /*
     *
     * TEST BATCH FOR ID ASSIGNMENT
@@ -1093,4 +1054,43 @@ public class ContactManagerTest {
         //get the resorted contacts from 3rd session (should only be 3)
         thirdManager.getContacts(1,2,3,4,5,6);
     }
+//
+//    IGNORE FOR NOW
+//    @Test
+//    public void testAddContactWithoutName(){
+//        String newName = null;
+//        String newNote = "A guy who looks a lot like Luis Carruthers";
+//        manager.addNewContact(newName,newNote);
+//        assertSame(manager.getContacts(0),NullPointerException.class);
+//    }
+//
+//    @Test
+//    public void testAddContactWithoutNotes(){
+//        String newName = "Luis Carruthers";
+//        String newNote = null;
+//        manager.addNewContact(newName,newNote);
+//        assertSame(manager.getContacts(0),NullPointerException.class);
+//    }
+//    /**
+//     * Testing adding a past meeting with a empty notes
+//     *
+//     * Should @throw a NullPointerException
+//     */
+//    @Test(expected = NullPointerException.class)
+//    public void testAddNewPastMeetingEmptyNotes() {
+//        String meetingNote = "";
+//        manager.addNewPastMeeting(contacts, pastDate, meetingNote);
+//    }
+//    /**
+//     * Testing adding empty meeting notes.
+//     *
+//     * Should @throw an NullPointerException
+//     */
+//    @Test(expected = NullPointerException.class)
+//    public void testAddEmptyMeetingNotes() {
+//        String emptyNotes = "";
+//        manager.addNewPastMeeting(contacts, pastDate,"");
+//        manager.addMeetingNotes(1, emptyNotes);
+//    }
+
 }
