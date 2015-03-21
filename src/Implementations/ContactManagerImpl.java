@@ -206,7 +206,7 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public void addNewContact(String name, String notes) {
-        if (name.equals(null) || notes.equals(null)) {
+        if (name == null || notes == null) {
             throw new NullPointerException();
         }
         Contact newContact = new ContactImpl(setContactId(),name,notes);
@@ -235,7 +235,7 @@ public class ContactManagerImpl implements ContactManager {
      */
     @Override
     public Set<Contact> getContacts(String name) {
-        if (name.equals(null) || name.equals("") ) {
+        if (name == null || name.equals("") ) {
             throw new NullPointerException();
         }
         Set<Contact> foundContacts = new HashSet<>();
