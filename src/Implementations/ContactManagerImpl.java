@@ -253,7 +253,11 @@ public class ContactManagerImpl implements ContactManager {
     public void flush() {
         File newFile = new File(file);
         if (newFile.exists()) {
-            newFile.delete();
+            try{
+                newFile.delete();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
         }
         try {
             handle = new XMLHandlerImpl(file);
