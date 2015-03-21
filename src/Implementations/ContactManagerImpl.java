@@ -57,7 +57,6 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //bugs fixed
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         if (date.before(today)){
@@ -113,7 +112,6 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //N.B. remember to add sorting function
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         if (!contacts.contains(contact)) {
@@ -145,8 +143,6 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //N.B. remember to add sorting function
-    //remember to test converting future to past meeting
     @Override
     public List<PastMeeting> getPastMeetingList(Contact contact) {
         if (!contacts.contains(contact)) {
@@ -164,13 +160,12 @@ public class ContactManagerImpl implements ContactManager {
     /**
      * {@inheritDoc}
      */
-    //no checking for dates?
     @Override
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
         if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
             throw new IllegalArgumentException();
         }
-        //n.b. not sure if contact check is require - review
+        //removed check for empty string, past meetings do not now implicitly need notes when created
         if (contacts == null || date == null || text == null){  //|| text.equals("")) {
             throw new NullPointerException();
         }
@@ -221,7 +216,6 @@ public class ContactManagerImpl implements ContactManager {
      * {@inheritDoc}
      */
     @Override
-    // n.b need to decide where invalid ids (i.e < 1) will be checked
     public Set<Contact> getContacts(int... ids) {
         Set<Contact> foundContacts = new HashSet<>();
         for (int id : ids){
