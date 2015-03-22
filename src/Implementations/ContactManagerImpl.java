@@ -226,14 +226,19 @@ public class ContactManagerImpl implements ContactManager {
     public Set<Contact> getContacts(int... ids) {
         Set<Contact> foundContacts = new HashSet<>();
         for (int id : ids){
+            //id's start at 1 and increment by 1 for each new contact. Hence last added will == size
+            if ( id < 1 || id > contacts.size()){
+                throw new IllegalArgumentException("There is no contact with the id "+id);
+            }
             for (Contact person : contacts) {
                 if (person.getId() == id) {
                     foundContacts.add(person);
                 }
             }
         }
+        //will work if all id's are invalid
         if(foundContacts.isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("There are no contacts with those ids");
         }
         return foundContacts;
     }
