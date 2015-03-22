@@ -19,9 +19,10 @@ public class ContactManagerImpl implements ContactManager {
     private String file = "contacts.xml";
     private  XMLHandler handle;
     /**
-     * ContactManagerImpl class constructor
+     * Contact ManagerImpl class constructor
      *
-     * Create a new manager.
+     * Create a new manager. If file contacts.xml exists, object data is loaded from it.
+     * If no file exists, new objects are created
      */
     public ContactManagerImpl(){
         File newFile = new File(file);
@@ -44,12 +45,16 @@ public class ContactManagerImpl implements ContactManager {
     }
     /**
      * Methods to assign a contact id, increments value every time called
+     *
+     * Contact id numbers are specific to Contact Manager
      */
     private int setContactId() {
         return ++this.currentContactId;
     }
     /**
      * Methods to assign a meeting id, increments value every time called
+     *
+     * Meeting id numbers are specific to Contact Manager
      */
     private int setMeetingId() {
         return ++this.currentMeetingId;
@@ -177,6 +182,8 @@ public class ContactManagerImpl implements ContactManager {
     }
     /**
      * {@inheritDoc}
+     *
+     * N.B. text will be appended to existing notes (if any)
      */
     @Override
     public void addMeetingNotes(int id, String text) {
