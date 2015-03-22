@@ -1101,5 +1101,4 @@ public class ContactManagerTest {
 //        manager.addNewPastMeeting(contacts, pastDate,"");
 //        manager.addMeetingNotes(1, emptyNotes);
 //    }
-
 }
