@@ -156,6 +156,15 @@ public class ContactManagerTest {
     public void testGetContactsUnusedId(){
         manager.getContacts(4);
     }
+    /**
+     * Testing getting contacts with several valid + one invalid id
+     *
+     * Should @throw a IllegalArgumentException
+     */
+    @Test (expected = IllegalArgumentException.class)
+    public void testGetContactsIdOneInvalid(){
+        manager.getContacts(1,2,3,10);
+    }
     /*
     *
     * TEST BATCH FOR GET CONTACT WITH STRING
