@@ -65,10 +65,10 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public int addFutureMeeting(Set<Contact> contacts, Calendar date) {
         if (date.before(today)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Date cannot be in the past");
         }
         if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Those contacts are unknown");
         }
         MeetingImpl newMeeting = new FutureMeetingImpl(setMeetingId(), date, contacts);
         meetings.add(newMeeting);
@@ -84,7 +84,7 @@ public class ContactManagerImpl implements ContactManager {
             return null;
         }
         if (meeting.getDate().after(today)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("That id corresponds to a future meeting");
         }
         return (PastMeeting)meeting;
     }
@@ -98,7 +98,7 @@ public class ContactManagerImpl implements ContactManager {
             return null;
         }
         if (meeting.getDate().before(today)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("That id corresponds to a past meeting");
         }
         return (FutureMeeting)meeting;
     }
@@ -120,7 +120,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public List<Meeting> getFutureMeetingList(Contact contact) {
         if (!contacts.contains(contact)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(contact.getName()+" is unknown");
         }
         List<Meeting> contactMeetings = new ArrayList<Meeting>();
         for(Meeting meeting : meetings) {
@@ -151,7 +151,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public List<PastMeeting> getPastMeetingList(Contact contact) {
         if (!contacts.contains(contact)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(contact.getName()+" is unknown");
         }
         List<PastMeeting> contactMeetings = new ArrayList<PastMeeting>();
         for(Meeting meeting : meetings) {
@@ -168,15 +168,15 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public void addNewPastMeeting(Set<Contact> contacts, Calendar date, String text) {
         if (!this.contacts.containsAll(contacts) || contacts.isEmpty()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Those contacts are unknown");
         }
         //removed check for empty string, past meetings do not now implicitly need notes when created
         if (contacts == null || date == null || text == null){  //|| text.equals("")) {
-            throw new NullPointerException();
+            throw new NullPointerException("Fields cannot be 'null'");
         }
        //not requested in the interface, but seem logical to have this check here...no?
         if (date.after(today)){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Date cannot be in the future");
         }
         meetings.add(new PastMeetingImpl(setMeetingId(), date, contacts, text));
     }
@@ -190,13 +190,13 @@ public class ContactManagerImpl implements ContactManager {
         Meeting meeting = getMeeting(id);
         String meetingNote = text;
         if (meeting == null) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("That Meeting does not exist");
         }
         if (meeting.getDate().after(today)) {
-            throw new IllegalStateException();
+            throw new IllegalStateException("That is a future meeting, hence is yet to be held");
         }
         if(text == null){
-            throw new NullPointerException();
+            throw new NullPointerException("You must enter some notes");
         }
         if(meeting instanceof PastMeeting) {
             String space = ". ";
@@ -214,7 +214,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public void addNewContact(String name, String notes) {
         if (name == null || notes == null) {
-            throw new NullPointerException();
+            throw new NullPointerException("Name or notes cannot be null");
         }
         Contact newContact = new ContactImpl(setContactId(),name,notes);
         contacts.add(newContact);
@@ -243,7 +243,7 @@ public class ContactManagerImpl implements ContactManager {
     @Override
     public Set<Contact> getContacts(String name) {
         if (name == null || name.equals("") ) {
-            throw new NullPointerException();
+            throw new NullPointerException("Who are you looking for?");
         }
         Set<Contact> foundContacts = new HashSet<>();
         for (Contact person : contacts){
