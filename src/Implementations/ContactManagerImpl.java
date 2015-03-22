@@ -172,7 +172,7 @@ public class ContactManagerImpl implements ContactManager {
         }
         //removed check for empty string, past meetings do not now implicitly need notes when created
         if (contacts == null || date == null || text == null){  //|| text.equals("")) {
-            throw new NullPointerException("Fields cannot be 'null'");
+            throw new NullPointerException("Contacts, date or text cannot be null");
         }
        //not requested in the interface, but seem logical to have this check here...no?
         if (date.after(today)){
